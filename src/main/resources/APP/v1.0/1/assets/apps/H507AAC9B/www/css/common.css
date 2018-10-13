@@ -1,0 +1,131 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*全局定义*/
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body{font-family:"微软雅黑";-webkit-text-size-adjust:100%;background:#f6f6f6 !important;color:#333;font-size:12px;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,i,var,caption{font-style:normal;}
+ul,ol,li{list-style:none;}a,a img,button {cursor:pointer;}
+button,input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+img,input,select,button,textarea{border:0;vertical-align:middle;}
+a:focus,input:focus,button:focus,select:focus,textarea:focus{outline:none;}
+a{text-decoration:none;}
+.fl{float:left;}.fr{float:right;}
+.clear{clear:both;height:0px;overflow: hidden;margin:0;padding:0;font-size:0}
+.clearfix:after{content:"wq";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+.whitebg{background:#fff;}
+
+/*间距*/
+.mt5{margin-top:5px;}.mt10{margin-top:10px;}.mt20{margin-top:20px;}.mt50{margin-top:50px;}.mt110{margin-top:110px;}.mb5{margin-bottom:5px;}.mb10{margin-bottom:10px;}.ml5{margin-left:5px;}.ml10{margin-left:10px;}.mr5{margin-right:5px;}.mr10{margin-right:10px;}.mr50{margin-right:50px;}
+.pt5{padding-top:5px;}.pl15{padding-left:15px;}pl20{padding-right:20px;}
+.bb1{border-bottom:1px solid #ddd;}
+
+/*header*/
+.header{width:100%; height:45px; background:#00aaee; position:relative;}
+.header-title{width:100%; height:45px; margin:0 auto; font:18px/45px "微软雅黑"; color:#fff; text-align:center;float:left;}
+.zx{width:10%;float:right; vertical-align:middle;height:45px; line-height:45px;}
+.zx img{ padding-top:10px;}
+.header-back{position:absolute; top:12px; left:8px;}
+.header-back a{display:inline-block; width:20px; height:20px; background:url(../images/header_back.png) no-repeat 0 0; background-size:cover;}
+.header-refresh{position:absolute; top:9px; right:10px;}
+.header-refresh a{display:inline-block; width:24px; height:24px; background:url(../images/header_refresh.png) no-repeat 0 0; background-size:cover;}
+.header-edit{position:absolute; top:11px; right:12px;}
+.header-edit a{display:inline-block; width:50px; height:20px; text-align:right; font:15px/20px "微软雅黑"; color:#fff;}
+
+.mall{width:100%; height:45px; background:#e73820; position:relative;}
+.mall-title{position:absolute; top:0; left:10px; width:20%; text-align:left; color:#fff; font:15px/43px "微软雅黑";}
+.cnt-title{position:absolute; width:100%; text-align:center; color:#fff; font:15px/43px "微软雅黑";}
+.search-bar{position:absolute; top:7px; right:10px; width:75%;}
+.search{width:100%; height:30px; background:#cd2d17; border-radius:3px;}
+input.wbk1{background:#cd2d17; color:#f0f0f0; width:95%; height:30px; text-indent:10px; font:12px/20px "微软雅黑";}
+.search_R{width:10%; float:right; background:#b92611;}
+.searchico{width:30px; height:30px; background:#b92611 url(../images/header_search.png) no-repeat 45% center; background-size:16px; display:inline-block; position:absolute; top:0; right:0; border-top-right-radius:3px; border-bottom-right-radius:3px;}
+
+/*footer*/
+.footer{width:100%; height:56px; background:#fff; border-top:1px solid #e2e2e2; position:fixed; left:0; bottom:0;}
+.footer dl{float:left; width:20%; text-align:center; position:relative;}
+.footer dt{padding-top:7px;}
+.footer a{color:#333; font:14px/20px "微软雅黑";}
+.footer a.hover{color:#00aaee;}
+
+/*列表*/
+.list{background:#fff; border-bottom:1px solid #ddd; border-top:1px solid #ddd;}
+.list li{border-bottom:1px solid #ddd; line-height:45px;}
+.list li a{width:99%; display:inline-block; padding-left:3px; font:14px/45px "微软雅黑"; color:#333;}
+.list li a img.right_more{float:right; margin-top:16px; margin-right:10px;}
+.list li.noline{border-bottom:none;}
+
+/*列表-红色标签*/
+span.red_label{padding:1px 5px 3px 5px; background:#ee041d; border-radius:3px; font:12px/8px "微软雅黑"; color:#fff; margin:0 5px;}
+/*列表-更多箭头*/
+span.list_more{position:absolute; top:15px; right:10px; float:right;}
+span.list_more a{display:inline-block; width:12px; height:12px; background:url(../images/list_more.png) no-repeat 0 0; background-size:cover;}
+
+/*开关单选*/
+.icon_on,span.icon_in{cursor:pointer; display:block; position:absolute; right:0; top:9px; width:46px; height:29px;}
+.icon_on a{background:url(../images/icon_in.png) no-repeat left -31px;display:block;width:46px;height:29px;}
+.icon_in a{background:url(../images/icon_in.png) no-repeat left top;}
+
+/*按钮*/
+.btnbox{width:94%; padding:0 3%;}
+.redbtn{width:100%; height:43px; border-radius:3px; background:#00aaee; border:1px solid #00aaee; display:inline-block; text-align:center; font:14px/44px "微软雅黑"; color:#fff;}
+.redbtn1{width:100px; height:36px; border-radius:3px; background:#00aaee; border:1px solid #00aaee; display:inline-block; text-align:center; font:14px/36px "微软雅黑"; color:#fff;margin-bottom:10px;display:inline;float:left;margin-left:50px;}
+.redbtn2{width:100px; height:36px; border-radius:3px; background:#fff; border:1px solid #00aaee; display:inline-block; text-align:center; font:14px/36px "微软雅黑"; color:#333;margin-bottom:10px;display:inline;float:left;margin-left:20px;}
+.graybtn{width:100%; height:43px; border-radius:3px; background:#fff; border:1px solid #aaa; display:inline-block; text-align:center; font:14px/44px "微软雅黑"; color:#333;}
+
+/*文字颜色*/
+.prompt{width:100%; text-align:center; font:12px/40px "微软雅黑";}
+.blue{color:#00aaee;}
+.black{color:#333;}
+.gray{color:#999;}
+.white{color:#fff;}
+.jg_table {
+	width:100%;
+	text-align:center;
+	background:#fff;
+	margin-top:17px;
+	float:left;
+	border-radius:5px;
+}
+.jg_table a{
+	color:#333;
+}
+.jg_table h1 {
+	font:35px/60px "微软雅黑"; color:#333;
+	text-align:center;
+}
+.jg_table h3 {
+	font:15px/30px "微软雅黑"; color:#ccc;
+	text-align:center;
+}
+.jg_table td {
+	height:40px;
+	line-height:40px;
+	font:15px/40px "微软雅黑"; color:#333;
+	padding-left:20px;
+	text-align:left;
+}
+.jg_table td.tx {
+	height:50px;
+	line-height:50px;
+	font:15px/50px "微软雅黑"; color:#01aaef;
+	padding-left:20px;
+	text-align:left;
+}
+.jg_table td.zc {
+	height:50px;
+	line-height:50px;
+	font:15px/50px "微软雅黑"; color:#333;
+	padding-left:20px;
+	text-align:center;
+}
+.jg_table td.zc a {
+	height:50px;
+	line-height:50px;
+	font:15px/50px "微软雅黑"; color:#01aaef;
+	padding-left:20px;
+	text-align:center;
+}

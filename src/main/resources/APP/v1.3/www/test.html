@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+    <head>
+    <meta charset="UTF-8">
+    <title>响应手机返回键</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    </head>
+    <style>
+.prj-cover-floor {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.active {
+    display: block;
+}
+</style>
+
+<body style="height: 100%;">
+    <div>
+    <button id="prj-filtrate-open-icon">点我出现浮层</button>
+    </div>
+    <div id="prj-cover-floor" class="prj-cover-floor"></div>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+    $("#prj-filtrate-open-icon").on("click", function() {
+        //添加历史记录
+        history.pushState({
+            prjCoverFloor: "prj-cover-floor"
+        }, "");
+        //添加sessionStorage
+        sessionStorage.prjCoverFloor = true;
+        //浮层显示隐藏
+        $("#prj-cover-floor").attr("active") ? $("#prj-cover-floor").removeClass("active") : $("#prj-cover-floor").addClass("active");
+    });
+
+/*
+ ** 监听历史记录来响应手机物理返回键
+ */
+window.addEventListener("popstate", function(e) {
+    /*
+     ** 整屏浮层
+     ** 通过sessionStorage.prjCoverFloor判断 true是有浮层
+     ** sessionStorage 页面存储 关闭页面会被清空
+     */
+    if (String(sessionStorage.prjCoverFloor) == "true") {
+        $("#prj-cover-floor").removeClass("active"); //隐藏浮层
+        sessionStorage.prjCoverFloor = false; //更新sessionStorage
+    }
+}, false);
+</script>
+</body>
+
+</html>

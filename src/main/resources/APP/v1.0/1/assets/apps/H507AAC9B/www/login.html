@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>座位预约系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/list.css" />
+</head>
+<body  onload="alert('注意:\n1.此软件未经同意请勿外传！\n2.请登录校园网后再进行登录。\n3.本软件禁止用于除学习以外的其他活动！')">
+<!--header begin-->
+<div class="header">
+    <div class="header-title">座位预约系统</div>
+</div>
+<!--login begin-->
+<div class="login-form">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15%" class="pl15"><img src="images/loginicon_user.png" height="24"/></td>
+        <td width="85%"><input type="text" id="username" placeholder="请输入账号" value="" /></td>
+      </tr>
+      <tr>
+        <td width="15%" class="pl15 no"><img src="images/loginicon_password.png"  height="28"/></td>
+        <td width="73%" class="no"><input type="password" id="password" placeholder="请输入密码" value="" /></td>
+      </tr>
+    </table>
+</div>
+<div class="login-item">
+	<div class="aoutlogin">
+	    <input name="checkbox" type="checkbox" id="chkRem" checked="checked" /><label for="checkbox"></label>记住密码
+	</div>
+    <span class="retrieve"><a id="resetPass" class="blue">忘记密码？</a></span>
+</div>
+<!--botton begin-->
+<div class="btnbox mt20"><a class="redbtn" id="login">系统登录</a></div>
+
+<script type="text/javascript" src="js/lib/jquery/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/lib/mui.min.js"></script>
+<script type="text/javascript" src="js/base/common_new.js"></script>
+<script type="text/javascript" src="js/base/config.js"></script>
+<script type="text/javascript" src="js/login.js"></script> 
+</body>
+</html>

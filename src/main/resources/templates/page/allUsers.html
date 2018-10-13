@@ -1,0 +1,151 @@
+#include("header.html", {title : "查询用户"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div> 
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i> 
+                        <i class="l_t_line"></i> 
+                    </div> 
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i> 
+                        <i class="r_t_line"></i> 
+                    </div> 
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i> 
+                        <i class="b_l_line"></i> 
+                    </div> 
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i> 
+                        <i class="b_r_line"></i> 
+                    </div> 
+                    <div class="main_title">
+                         查询用户信息
+                    </div>
+
+                    <div id="ACode" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+                        <form class="layui-form" method="post" action="/allUsers">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label" style="color: white;">学号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
+                                           style="background-color: rgba(12, 27, 45, 0.3);color: white;">
+                                </div>
+                                <div class="layui-input-block" style="margin-left: 49%;margin-top: 1%;">
+                                    <button type="submit" class="layui-btn layui-btn-primary">查询</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+                        #if(stuInfo==null)
+                        #else
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                            <legend style="color: white;">信息详情</legend>
+                        </fieldset>
+
+                        <ul class="layui-timeline">
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title" style="color: white;">用户id</h3>
+                                    <p>
+                                        ${stuInfo.userId}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title" style="color: white;">学号</h3>
+                                    <p>${stuInfo.userPhysicalCard}</p>
+
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title" style="color: white;">姓名</h3>
+                                    <p>
+                                        ${stuInfo.userName}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">手机号</div>
+                                    <p>
+                                        ${stuInfo.mobile}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">密码</div>
+                                    <p>
+                                        ${stuInfo.password}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">专业</div>
+                                    <p>
+                                        ${stuInfo.dept}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">微信</div>
+                                    <p>
+                                        ${stuInfo.wechat}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        #end
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/layui/layui.js"></script>
+    <script>
+
+
+    </script>
+#include("footer.html")

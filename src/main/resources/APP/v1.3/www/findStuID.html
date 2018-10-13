@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" media="screen and (max-device-width: 320px)" />
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
+	<link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
+	<link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+	<link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+	<link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png" media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)" />
+	<link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png" media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
+	<title>一点通座位预定系统</title>
+	<link href="static/css/style.css" rel="stylesheet" type="text/css">
+	<link href="static/css/framework.css" rel="stylesheet" type="text/css">
+	<link href="static/css/owl.theme.css" rel="stylesheet" type="text/css">
+	<link href="static/css/swipebox.css" rel="stylesheet" type="text/css">
+	<link href="static/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="static/css/animate.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="static/js/jquery.js"></script>
+	<script type="text/javascript" src="static/js/jqueryui.js"></script>
+	<script type="text/javascript" src="static/js/framework.plugins.js"></script>
+	<script type="text/javascript" src="static/js/custom.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="layui/css/layui.css"  media="all">
+	<script src="laydate/laydate.js"></script>
+	<link rel="stylesheet" media="screen" href="laydate/theme/default/laydate.css">
+	<script src="layui/layui.js" charset="utf-8"></script>
+</head>
+<body id="app">
+	<div id="preloader">
+		<div id="status">
+			<p class="center-text">正在加载内容...
+				<em>一点通图书馆座位预定系统</em></p>
+		</div>
+	</div>
+
+	<div class="header">
+		
+		<div class="header-controls">
+			
+			<a href="#" class="open-menu">
+				<i class="fa fa-navicon"></i>
+			</a>
+		</div>
+	</div>
+	<div class="all-elements">
+		<div class="snap-drawers">
+			<!-- Left Sidebar -->
+			<div class="snap-drawer snap-drawer-left">
+				<div class="sidebar-logo"></div>
+				<div class="sidebar-divider">主要功能</div>
+				<ul class="sidebar-navigation">
+					<li>
+						<a  href="index.html">
+							<i class="fa fa-home"></i>主页
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="bookSeat.html">
+							<i class="fa fa-cog"></i>预定座位
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="history.html">
+							<i class="fa fa-picture-o"></i>历史预定
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="seat.html">
+							<i class="fa fa-camera"></i>入座/取消
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="findStuID.html">
+							<i class="fa fa-search"></i>盗号查询系统
+							<i class="fa fa-circle" style="color: green;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="person.html">
+							<i class="fa fa-file"></i>个人中心
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="about.html">
+							<i class="fa fa-mobile"></i>关于我们
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li>
+						<a href="logout.html">
+							<i class="fa fa-youtube-play"></i>退出登录
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+				</ul>
+				<div class="sidebar-divider">Copyright 2018 zimu. All rights reserved.</div></div>
+			
+		</div>
+		<!-- Page Content-->
+		<div id="content" class="snap-content">
+			<div class="header-clear"></div>
+			<div class="content">
+				<div class="container no-bottom">
+					<h2>反盗号系统</h2>
+				<div class="decoration"></div>
+				<center>
+				<form role="form" onsubmit="false" style="margin-top: 25%;margin-bottom: 15%;">
+					<div class="form-group">
+							<label for="name">请输入学号：</label><br><br>
+							<input type="text"  name="stuID" id="stuID" class="form-control">			
+					</div><br><br>
+					<center>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="button" id="book" class="btn btn-default" onclick="run();">查询</button>
+							</div>
+						</div></center>
+				</form>
+				<p>
+					<strong style="color: red;">查询结果：</strong> 
+
+					<p >最新一次预定的结果为：<span id="result"></span></p>
+				</p>
+				
+				<div class="decoration"></div>	
+				<p>
+					<strong style="color: red;">使用说明：</strong> 
+					<p>1. 此功能可查询学号所预定位置，但<span style="color: red;">不会修改学号密码.</span></p>
+					<p>2. 可以通过本系统查找使用被盗学号预定位置的人进行理性沟通</p>
+					
+				</p>			
+			</div>
+			<!-- Page Footer-->
+			<div class="footer">
+				
+				<p class="center-text">Copyright 2018 zimu. All rights reserved.</p></div>
+		</div>
+	
+	</div>
+	<script type="text/javascript">
+		function run(){
+			var stuID = $('#stuID').val();
+			var params = {
+				"intf_code" : "QRY_RECORD",
+				"params" : {
+					"userPhysicalCard" : stuID,
+					"flag" : "0"
+				}
+			};
+			$.ajax({
+			  		type : 'post',
+			  		url  : 'http://211.70.171.14:9999/tsgintf/main/service?v=1536297643841',
+			  		data : JSON.stringify(params),
+			        headers: {
+			              "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+localStorage.stuID
+			          },
+			        async: true,
+			        cache: false,
+			        dataType : 'json',
+			        contentType : "application/json;charset=utf-8",
+			        success : function(data){
+			        	var result = "教室为：";
+			        	result =result + data['result_data']['rows'][0]['roomName'] + ", ";
+			        	result = result + "日期为：" + format(data['result_data']['rows'][0]['appointmentDate']) + ", ";
+			        	result = result + "时间为：" +data['result_data']['rows'][0]['statTime'] +" - " +data['result_data']['rows'][0]['endTime'];
+			        	result = result + "座位为：" + data['result_data']['rows'][0]['seatNo'] + "。 ";
+			        	$('#result').html('');
+			        	$('#result').append(result);
+			        }
+			});
+
+		}
+		function format(shijianchuo)
+			{
+				//shijianchuo是整数，否则要parseInt转换
+				var time = new Date(shijianchuo);
+				var y = time.getFullYear();
+				var m = time.getMonth()+1;
+				var d = time.getDate();
+				var h = time.getHours();
+				var mm = time.getMinutes();
+				var s = time.getSeconds();
+				return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+			}
+	function add0(m){return m<10?'0'+m:m }
+	</script>
+</body>

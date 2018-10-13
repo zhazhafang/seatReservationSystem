@@ -1,0 +1,110 @@
+.table_div {
+	width:120px;
+	height:120px;
+	float:left;
+	margin-left:40px;
+	margin-top:20px;
+}
+.table_left1 {
+	background:url(../images/desk/table1_left.png);
+	width:59px;
+	height:54px;
+	float:left;
+}
+.table_left1 font{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_right1 {
+	background:url(../images/desk/table1_right.png);
+	width:59px;
+	height:54px;
+	float:right;
+}
+.table_right1 font{
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_left2 {
+	background:url(../images/desk/table2_left.png);
+	width:59px;
+	height:54px;
+	float:left;
+}
+.table_left2 font{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_right2 {
+	background:url(../images/desk/table2_right.png);
+	width:59px;
+	height:54px;
+	float:right;
+}
+.table_right2 font{
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_left3 {
+	background:url(../images/desk/table3_left.png);
+	width:59px;
+	height:54px;
+	float:left;
+	cursor:pointer;
+}
+.table_left3 font{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_right3 {
+	background:url(../images/desk/table3_right.png);
+	width:59px;
+	height:54px;
+	float:right;
+	cursor:pointer;
+}
+.table_right3 font{
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_left_hover {
+	background:url(../images/desk/table_hover_left.png);
+	width:59px;
+	height:54px;
+	float:left;
+}
+.table_left_hover font{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_right_hover {
+	background:url(../images/desk/table_hover_right.png);
+	width:59px;
+	height:54px;
+	float:right;
+}
+.table_right_hover font{
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+	font:bold 14px/30px "微软雅黑"; color:#fff;
+}
+.table_title {
+	clear:both;
+	font:bold 14px/30px "微软雅黑"; color:#333;
+	text-align:center;
+}

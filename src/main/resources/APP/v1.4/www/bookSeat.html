@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" media="screen and (max-device-width: 320px)" />
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
+	<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
+	<link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
+	<link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+	<link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+	<link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png" media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)" />
+	<link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png" media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
+	<title>一点通座位预定系统</title>
+	<link href="static/css/style.css" rel="stylesheet" type="text/css">
+	<link href="static/css/framework.css" rel="stylesheet" type="text/css">
+	<link href="static/css/owl.theme.css" rel="stylesheet" type="text/css">
+	<link href="static/css/swipebox.css" rel="stylesheet" type="text/css">
+	<link href="static/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="static/css/animate.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="static/js/jquery.js"></script>
+	<script type="text/javascript" src="static/js/jqueryui.js"></script>
+	<script type="text/javascript" src="static/js/framework.plugins.js"></script>
+	<script type="text/javascript" src="static/js/custom.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="layui/css/layui.css"  media="all">
+	<script src="laydate/laydate.js"></script>
+	<link rel="stylesheet" media="screen" href="laydate/theme/default/laydate.css">
+	<script src="layui/layui.js" charset="utf-8"></script>
+</head>
+<body id="app">
+	<div id="preloader">
+		<div id="status">
+			<p class="center-text">正在加载内容...
+				<em>一点通图书馆座位预定系统</em></p>
+		</div>
+	</div>
+
+	<div class="header">
+		
+		<div class="header-controls">
+			
+			<a href="#" class="open-menu">
+				<i class="fa fa-navicon"></i>
+			</a>
+		</div>
+	</div>
+	<div class="all-elements">
+		<div class="snap-drawers">
+			<!-- Left Sidebar -->
+			<div class="snap-drawer snap-drawer-left">
+				<div class="sidebar-logo"></div>
+				<div class="sidebar-divider">主要功能</div>
+				<ul class="sidebar-navigation">
+					<li>
+						<a  href="index.html">
+							<i class="fa fa-home"></i>主页
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="bookSeat.html">
+							<i class="fa fa-cog"></i>预定座位
+							<i class="fa fa-circle" style="color: green;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="history.html">
+							<i class="fa fa-picture-o"></i>历史预定
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="seat.html">
+							<i class="fa fa-camera"></i>入座/取消
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="authorize.html">
+							<i class="fa fa-send"></i>自助授权
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="findStuID.html">
+							<i class="fa fa-search"></i>盗号查询系统
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="person.html">
+							<i class="fa fa-file"></i>个人中心
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li class="has-submenu">
+						<a  href="about.html">
+							<i class="fa fa-mobile"></i>关于我们
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+					<li>
+						<a href="logout.html">
+							<i class="fa fa-youtube-play"></i>退出登录
+							<i class="fa fa-circle" style="color: red;"></i></a>
+					</li>
+				</ul>
+				<div class="sidebar-divider">Copyright 2018 zimu. All rights reserved.</div></div>
+			
+		</div>
+		<!-- Page Content-->
+		<div id="content" class="snap-content">
+			<div class="header-clear"></div>
+			<div class="content">
+				<div class="container no-bottom">
+					<h2>预定座位</h2>
+				<div class="decoration"></div>
+				<div class="container no-bottom">
+					<form role="form" onsubmit="false">
+						<div class="form-group">
+							<label for="name">选择教室</label>
+							<select class="form-control" id="roomId">
+								<option value="12" selected="selected">101</option>
+								<option value="9" >202</option>
+								<option value="10">203</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="name">选择日期</label>
+							<input type="text"  name="day" id="day" class="form-control" onblur="findSeat();">
+
+							
+						</div>
+						<div class="form-group">
+							<label for="name">开始时间</label>
+							<input type="text" name="startTime" id="startTime" class="form-control"  onblur="findSeat();">
+						</div>
+						<div class="form-group">
+							<label for="name">结束时间</label>
+							<input type="text" name="endTime" id="endTime" class="form-control" focus="Etime();" onblur="findSeat();">
+						</div>
+						<div class="form-group">
+							<label for="name">选择座位(以下为可预订座位)</label>
+							<select class="form-control" id="canSeat">
+								<option value="">暂无位置</option>
+							</select>
+						</div>
+						<center>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="button" id="book" class="btn btn-default">预定</button>
+							</div>
+						</div></center>
+					</form>
+				</div>
+				<div class="decoration"></div>
+				<p>
+					<strong style="color: red;">注意事项：</strong> 
+					<p>1. 由于app推出过于急促，所以部分功能还未优化.</p>
+					<p style="color: red;">2. 203自习室，59A,59B,59C,59D,59E,59F不能预订，请不要选择。</p>
+					<p style="color: red;">3. 101自习室，62A,62B,62C,62D不能预订，请不要选择.</p>
+					<p >4. 日期、时间选择后，可先点击“结束时间”，再点击空白处，有时“选择座位”可能会有延迟，请耐心等待.</p>
+				</p>
+				<div class="decoration"></div>
+				
+			</div>
+			<!-- Page Footer-->
+			<div class="footer">
+				
+				<p class="center-text">Copyright 2018 zimu. All rights reserved.</p></div>
+		</div>
+	
+	</div>
+	<script type="text/javascript">
+	var cantSeat203 = ['59A','59B','59C','59D','59E','59F'];
+  	var cantSeat101 = ['62A','62B','62C','62D'];
+  laydate.render({
+    elem: '#day', //指定元素
+    min: 0
+    ,max: 7
+  });
+  laydate.render({
+  	elem: '#startTime'
+    ,type: 'time'
+    ,format: 'HH:mm'
+    ,min: '06:00:00'
+    ,max: '23:00:00'
+  });
+  $('#endTime').focus(function(){
+  	var startTime = $('#startTime').val();
+  	var endTime = (parseInt(startTime.substring(0,2))+5);
+  	if(endTime > 23){
+  	    endTime = 23;
+	}
+  	$('#endTime').val(endTime+startTime.substring(2));
+  });
+
+  function findSeat() {
+  	var roomId = $('#roomId').val();
+  	var day = $('#day').val();
+  	var startTime = $('#startTime').val();
+  	var endTime = $('#endTime').val();
+  	
+  	if(day!=''&&startTime!=''&&endTime!=''&&(endTime>startTime)){
+  		var params = {
+                    "intf_code" : "QRY_PRE_SEAT",
+                        "params" : {
+                            "roomId":roomId,
+                            "dateStr":day,
+                            "startHour":startTime,
+                            "endHour":endTime
+                        }
+                    };
+  	 $.ajax({
+                    type : 'post',
+                    url : 'http://211.70.171.14:9999/tsgintf/main/service?v=1536237232986',
+                    data : JSON.stringify(params),
+                    headers: {
+                          "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+localStorage.stuID
+                      },
+                    async: true,
+                    cache: false,
+                    contentType : "application/json;charset=utf-8",
+                    success : function(data){
+                        var param = /\[\{"total":0(.+?)\}\]/g;
+                        var resultData = data.match(param);
+                        var resultJson = eval(resultData[0]);
+                        param = /\[\{"etagId"(.+?)\}\]/g;
+                        var noSeat = data.match(param);
+                        if(noSeat == null){
+                            var noSeatStr = "";
+						}else {
+                            var noSeatStr = noSeat.toString();
+						}
+                        var resultArr = new Array();
+						for (var i = 0; i < resultJson.length; i++) {
+							if (noSeatStr.indexOf(resultJson[i].etagId)==-1) {
+								resultArr.push(resultJson[i].seatNo);
+							}
+						}
+						$('#canSeat').html('');
+						for (var i = 0; i < resultArr.length; i++) {
+							$('#canSeat').append("<option value=\""+resultArr[i]+"\">"+resultArr[i]+"</option>");
+						}
+                    }
+                });
+  	}
+  }
+  $('#book').click(function(){
+  	var canSeat = $('#canSeat').val();
+  	var roomId = $('#roomId').val();
+  	var day = $('#day').val();
+  	var startTime = $('#startTime').val();
+  	var endTime = $('#endTime').val();
+  	if (roomId==10&&cantSeat203.indexOf(canSeat)!=-1) {
+  		return;
+  	}
+  	if (roomId==12&&cantSeat101.indexOf(canSeat)!=-1) {
+  		return;
+  	}
+  	var params = {
+  		"intf_code" : "UPD_PRE_SEAT",
+                        "params" : {
+                            "seatNo":canSeat,
+                            "roomId" : roomId,
+                            "dateStr":day,
+                            "startHour":startTime,
+                            "endHour":endTime,
+                            "userPhysicalCard":localStorage.stuID
+                        }
+  	};
+  	$.ajax({
+  		type : 'post',
+  		url  : 'http://211.70.171.14:9999/tsgintf/main/service?v=1536289824252',
+  		data : JSON.stringify(params),
+        headers: {
+              "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+localStorage.stuID
+          },
+        async: true,
+        cache: false,
+        dataType : 'json',
+        contentType : "application/json;charset=utf-8",
+        success : function(data){
+        	if(data.result_code=="0"){
+        		alert(data.result_desc);
+        		addHistory();
+        	}else{
+        		alert(data.result_desc);
+        	}
+        	
+        }
+	});
+  });
+  function addHistory(){
+  	var room={'9':'202', '10':'203','12':'101'};
+  	var canSeat = $('#canSeat').val();
+  	var roomId = $('#roomId').val();
+  	var day = $('#day').val();
+  	var startTime = $('#startTime').val();
+  	$.post("http://119.29.207.55/app/addHistory.php",{
+  		"day" : day,
+  		"bookTime" : startTime,
+  		"room" : room[roomId],
+  		"seatNo" : canSeat,
+  		"stuId" : localStorage.stuID 
+  	},function(data){
+  		
+  	});
+  }
+	</script>
+</body>

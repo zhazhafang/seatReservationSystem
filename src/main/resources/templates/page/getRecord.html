@@ -1,0 +1,247 @@
+#include("header.html", {title : "预定记录"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div> 
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i> 
+                        <i class="l_t_line"></i> 
+                    </div> 
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i> 
+                        <i class="r_t_line"></i> 
+                    </div> 
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i> 
+                        <i class="b_l_line"></i> 
+                    </div> 
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i> 
+                        <i class="b_r_line"></i> 
+                    </div> 
+                    <div class="main_title">
+                         预定记录表
+                    </div>
+
+                    <div id="ACode" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+                        <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
+                        style="background-color: rgb(12, 27, 45);">查询预定记录</button>
+                        #if(recordOne==null)
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>姓名</th>
+                                <th>学号</th>
+                                <th>预定时间</th>
+                                <th>自习室</th>
+                                <th>座位</th>
+                                <th>开始时间</th>
+                                <th>状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(AllRecord record : records.rows)
+                            <tr>
+                                <td>${record.bookId}</td>
+                                <td>${record.etagId}</td>
+                                <td style="width: 2%;">${record.etagMd5}</td>
+                                <td>${record.appointmentDate}</td>
+                                <td>${record.roomName}</td>
+                                <td>${record.seatNo}</td>
+                                <td>${record.statTime}</td>
+                                <td>
+                                    #if(record.status==1)
+                                    <div style="color: #00FF00">预约成功</div>
+                                    #elseif(record.status==2)
+                                    <div style="color: firebrick;">已就坐</div>
+                                    #elseif(record.status==3)
+                                    <div style="color: darkcyan;">预约取消</div>
+                                    #elseif(record.status==4)
+                                    <div style="color: gainsboro;">已失效</div>
+                                    #elseif(record.status==5)
+                                    <div style="color: greenyellow;">已暂离</div>
+                                    #elseif(record.status==6)
+                                    <div style="color: burlywood;">已结束</div>
+                                    #end
+                                </td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+                        #else<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend style="color: white;">查询学号：${stuId}</legend>
+                    </fieldset>
+                        <ul class="layui-timeline">
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-timeline-axis" style="color: red;"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">未来在继续……</div>
+                                </div>
+                            </li>
+                            #for(AllRecord record : recordOne)
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis" style="color: red;"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">
+                                        时间 ： ${record.appointmentDate}.
+                                        自习室 : ${record.roomName}.
+                                        座位  ： ${record.seatNo}.
+                                        开始时间 ：${record.statTime}.
+                                        状态 ：#if(record.status==1)
+                                        <span style="color: #00FF00">预约成功</span>
+                                        #elseif(record.status==2)
+                                        <span style="color: firebrick;">已就坐</span>
+                                        #elseif(record.status==3)
+                                        <span style="color: darkcyan;">预约取消</span>
+                                        #elseif(record.status==4)
+                                        <span style="color: gainsboro;">已失效</span>
+                                        #elseif(record.status==5)
+                                        <span style="color: greenyellow;">已暂离</span>
+                                        #elseif(record.status==6)
+                                        <span style="color: burlywood;">已结束</span>
+                                        #end
+                                    </div>
+                                </div>
+                            </li>
+                            #end
+
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis" style="color: red;"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title" style="color: white;">更久前，轮子时代。记录无法统计。</div>
+                                </div>
+                            </li>
+                        </ul>
+                        #end
+                        <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加用户的模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content" style="background-color:rgba(12, 27, 45, 0.3); color: #fff;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        查询预约记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="layui-form" action="/getRecord" id="myform" method="post">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">学号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
+                                style="background-color: rgba(12, 27, 45, 0.3);">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="submit" class="btn btn-primary" onclick="$('#myform').submit();">
+                        查询
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="/static/layui/layui.js"></script>
+    <script>
+
+        var msg = "";
+        function setContent(ob) {
+            msg = "";
+            $.post("/getACStuId", {
+                id : ob
+            }, function (data, status) {
+                msg = "";
+                for (var key in data){
+                    msg = msg + data[key] + "<br>";
+                }
+            })
+        }
+        layui.use(['laypage', 'layer'], function(){
+            var $ = layui.jquery, layer = layui.layer;
+            var laypage = layui.laypage
+                ,layer = layui.layer;
+            //自定义样式
+            #if(recordOne==null)
+            laypage.render({
+                elem: 'demo2'
+                ,count: ${records.totalRows}
+                ,limit: 12
+                ,curr : ${records.pageNum}
+                ,theme : '#0C1B2D'
+                ,jump: function(obj, first) {
+                    //obj包含了当前分页的所有参数，比如：
+                    if(!first){
+                        //do something
+                        window.location="getRecord?page="+obj.curr;
+                    }
+                }
+            });
+            #end
+            var active = {
+                confirmTrans: function(){
+                    //配置一个透明的询问框
+                    layer.msg(msg, {
+                        time: 20000, //20s后自动关闭
+                        btn: ['关闭']
+                    });
+                }
+            };
+
+            $('#ACode td').on('click', function(){
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+
+        });
+    </script>
+#include("footer.html")

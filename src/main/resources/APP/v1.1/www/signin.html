@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="js/jquery.min.js" charset="utf-8"></script>
+    <script src="js/jquery.cookie.js" charset="utf-8"></script>
+    <title>绿色清爽响应式登录页面模板</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        html { height: 100%; }
+        body { height: 100%; background: #fff url(images/backgroud.png) 50% 50% no-repeat; background-size: cover;}
+        .dowebok { position: absolute; left: 50%; top: 50%; width: 430px; height: 550px; margin: -300px 0 0 -215px; border: 1px solid #fff; border-radius: 20px; overflow: hidden;}
+        .logo { width: 104px; height: 104px; margin: 50px auto 80px; background: url(images/login.png) 0 0 no-repeat; }
+        .form-item { position: relative; width: 360px; margin: 0 auto; padding-bottom: 30px;}
+        .form-item input { width: 288px; height: 48px; padding-left: 70px; border: 1px solid #fff; border-radius: 25px; font-size: 18px; color: #fff; background-color: transparent; outline: none;}
+        .form-item button { width: 360px; height: 50px; border: 0; border-radius: 25px; font-size: 18px; color: #1f6f4a; outline: none; cursor: pointer; background-color: #fff; }
+        #username { background: url(images/emil.png) 20px 14px no-repeat; }
+        #password { background: url(images/password.png) 23px 11px no-repeat; }
+        .tip { display: none; position: absolute; left: 20px; top: 52px; font-size: 14px; color: #f50; }
+        .reg-bar { width: 360px; margin: 20px auto 0; font-size: 14px; overflow: hidden;}
+        .reg-bar a { color: #fff; text-decoration: none; }
+        .reg-bar a:hover { text-decoration: underline; }
+        .reg-bar .reg { float: left; }
+        .reg-bar .forget { float: right; }
+        .dowebok ::-webkit-input-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
+        .dowebok :-moz-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
+        .dowebok ::-moz-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
+        .dowebok :-ms-input-placeholder { font-size: 18px; line-height: 1.4; color: #fff;}
+
+        @media screen and (max-width: 500px) {
+            * { box-sizing: border-box; }
+            .dowebok { position: static; width: auto; height: auto; margin: 0 30px; border: 0; border-radius: 0; }
+            .logo { margin: 50px auto; }
+            .form-item { width: auto; }
+            .form-item input, .form-item button, .reg-bar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dowebok">
+        <div class="logo"></div>
+        <div class="form-item">
+            <input id="username" type="text" autocomplete="off" placeholder="学号" >
+            
+        </div>
+        <div class="form-item">
+            <input id="password" type="password" autocomplete="off" placeholder="登录密码">
+            
+        </div>
+        <div class="form-item"><button data-method="confirmTrans" data-type="b" id="submit" onclick="denglu();">登 录</button></div>
+        <div class="reg-bar">
+            <a class="reg" href="login.html">返回主页</a>
+            <a class="forget" href="#" data-method="notice" id="forgotPassword">忘记密码</a>
+        </div>
+    </div>
+    
+    <script>
+        var notice = "正在获取登录密钥……";
+        var tversion = null;
+        var md5username = null;
+        layui.use('layer', function(){ //独立版的layer无需执行这一句
+  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+  
+  //触发事件
+  var active = {
+    confirmTrans: function(){
+      //配置一个透明的询问框
+      layer.msg(notice, {
+        time: 1000//20s后自动关闭
+      });
+    },
+    notice: function(){
+      //配置一个透明的询问框
+      layer.msg('请通过信息门户进行密码重置。', {
+        time: 1000//20s后自动关闭
+      });
+    }
+  };
+
+  $('#submit').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+  $('#forgotPassword').on('click', function(){
+    var othis = $(this), method = othis.data('method');
+    active[method] ? active[method].call(this, othis) : '';
+  });
+  
+});
+    function denglu(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        $.post("http://119.29.207.55/app/key.php",{
+            stuID : username
+        },function(data, status){
+            if (data.tversion == '1') {
+                notice = "对不起，你的账号未被授权！";
+            }else{
+                tversion = data.tversion;
+                md5username = data.md5username;
+                localStorage.tversion = tversion;
+                localStorage.md5username = md5username;
+                notice = "已获得登录密钥。";
+                var params = {
+                    "intf_code" : "QRY_LOGIN",
+                        "params" : {
+                            "userPhysicalCard":username,
+                            "password":password,
+                            "imei":username,
+                            "version":"5.0",
+                            "tversion":tversion,
+                            "md5username":md5username
+                        }
+                    }
+                $.ajax({
+                    type : 'post',
+                    url : 'http://211.70.171.14:9999/tsgintf/main/service',
+                    data : JSON.stringify(params),
+                    headers: {
+                          "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+username
+                      },
+                    async: true,
+                    cache: false,
+                    contentType : "application/json;charset=utf-8",
+                    dataType : 'json',
+                    success : function(data){
+                        if (data.result_code == '0') {
+                            notice = "登录成功！";
+                            window.location = "index.html";
+                        }else if (data.result_code == '10002') {
+                            notice = "用户名或密码错误！";
+                        }else{
+                            notice = "未知错误！";
+                        }
+                    }
+                });
+               if(typeof(Storage)!=="undefined")
+                {
+                    localStorage.stuID = username;
+                    localStorage.username = data.username;
+                    localStorage.tel = data.tel;
+                } else {
+                    alert("您的设备不支持H5存储.");
+                }
+            }     
+        },"json");
+
+
+    }
+    </script>
+
+<div style="text-align:center;">
+</div>
+
+</body>
+</html>

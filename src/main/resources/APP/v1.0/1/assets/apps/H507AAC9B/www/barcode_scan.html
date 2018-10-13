@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<title>Hello H5+</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				position: absolute;
+				top: 45px;
+				bottom: 44px;
+				text-align: center;
+			}
+			.tip {
+				color: #FFFFFF;
+				font-weight: bold;
+				text-shadow: 0px -1px #103E5C;
+			}
+			footer {
+				width: 100%;
+				height: 44px;
+				position: absolute;
+				bottom: 0px;
+				line-height: 44px;
+				text-align: center;
+				color: #FFF;
+			}
+			.fbt {
+				width: 100%;
+				height: 100%;
+				background-color: #FFCC33;
+				float: left;
+			}
+			.fbt:active {
+			  	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+				box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+			}
+		</style>
+	</head>
+	<header style="background:#00aaee;" class="mui-bar mui-bar-nav">
+		<a style="color:white;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 style="color:white;" class="mui-title">扫码入座/离座</h1>
+	</header>
+	<body style="background-color: #000000;">
+		<div id="bcid">
+			<div style="height:40%"></div>
+			<p class="tip">...载入中...</p>
+		</div>
+		<footer>
+			<div style="background:#00aaee;" class="fbt" onclick="back();">取　 消</div>
+		</footer>
+		<script type="text/javascript" src="js/lib/jquery/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/lib/mui.min.js"></script>
+		<script type="text/javascript" src="js/lib/common.js"></script>
+		<script type="text/javascript" src="js/base/common_new.js"></script>
+		<script type="text/javascript" src="js/base/config.js"></script>
+		<script type="text/javascript" src="js/center.js"></script>
+		<script type="text/javascript" src="js/lib/layer.js"></script>
+		<script type="text/javascript" src="js/barcode_scan.js"></script>
+	</body>
+</html>

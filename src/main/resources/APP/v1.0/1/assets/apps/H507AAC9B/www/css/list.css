@@ -1,0 +1,149 @@
+@charset "utf-8";
+/* CSS Document */
+/*首页-广告轮播*/
+.index-slidebox{position:relative; overflow:hidden; z-index:1;}
+.index-slidebox ul{-webkit-padding-start:0px;}
+.index-slidebox ul li img{width:100%; height:auto;}
+.index-slidebox>ol{position:relative; z-index:10; height:20px; margin-top:-23px; padding-right:15px; text-align:center;}
+.index-slidebox>ol>li{display:inline-block; width:10px; height:10px; background:#ddd; border-radius:10px; margin:5px 0;}
+.index-slidebox>ol>li.on{background:#00aaee;}
+
+/*首页-列表*/
+.classify-list1{width:100%; padding:0% 0%; float:left;}
+.classify-list-title1{
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #ddd;
+    text-align:left;
+	text-indent:10px;
+	font:bold 14px/30px "微软雅黑";
+	color:#333;
+	background:#fff;
+	margin-top:15px;
+	}
+.sy_table {
+	width:100%;
+	background:#fff;
+	margin-right:10px;
+	border-bottom:1px solid #eee;
+}
+.sy_table td.span{
+	color:#969696;
+}
+.sy_table td {
+	height:40px;
+	line-height:40px;
+	font:14px/20px "微软雅黑"; color:#333;
+	border-bottom:1px solid #eee;
+}
+.classify-list{width:100%; padding:0% 0%; float:left;}
+.classify-list-title{
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #ddd;
+    text-align:left;
+	text-indent:10px;
+	font:bold 14px/30px "微软雅黑";
+	color:#333;
+	margin-top:5px;
+	text-align:center;
+	}
+.list_table {
+	width:100%;
+	text-align:center;
+	background:#fff url(../images/button.png) no-repeat right top 8px;
+	margin-right:10px;
+	margin-top:13px;
+}
+.list_table td.span{
+	color:#969696;
+}
+.list_table td {
+	height:40px;
+	line-height:40px;
+	font:14px/20px "微软雅黑"; color:#333;
+}
+.list_table1 {
+	width:100%;
+	background:#fff;
+	text-align:center;
+	background:#fff url(../images/button1.png) no-repeat right top 8px;
+	margin-right:10px;
+	margin-top:13px;
+}
+.list_table1 td.span{
+	color:#969696;
+}
+.list_table1 td {
+	height:40px;
+	line-height:40px;
+	font:14px/20px "微软雅黑"; color:#333;
+}
+.yy_table {
+	width:100%;
+	text-align:center;
+	background:#fff;
+	margin-right:10px;
+	margin-top:13px;
+}
+.yy_table td.span{
+	color:#969696;
+}
+.yy_table td {
+	height:40px;
+	line-height:40px;
+	font:14px/20px "微软雅黑"; color:#333;
+}
+/* CSS Document */
+/*登录*/
+.login-form{background:#fff; border-top:1px solid #ddd; margin-top:20px;}
+.login-form td{height:50px; font:14px/24px "微软雅黑"; color:#333;border-bottom:1px solid #ddd;}
+.login-form td.no{border-bottom:none;}
+.login-form td img{width:20px; height:20px; vertical-align:middle;}
+.login-form td input{color:#ccc;}
+.login-item{width:94%; height:20px; padding:3% 3%;}
+.login-item .aoutlogin{float:left; font:13px/24px "微软雅黑"; color:#333; margin-left:10px;}
+.login-item .retrieve a{float:right; text-align:right; font:13px/24px "微软雅黑";}
+
+/*忘记密码*/
+.login-text{width:94%; padding:0% 3%; font:14px/45px "微软雅黑"; position:relative;}
+.login-text span.left-title{color:#666;}
+.login-text span.right-tips{width:50%; height:45px; text-align:right; overflow:hidden;}
+.login-text span.right-tips input{color:#d2d2d2; font:14px/24px "微软雅黑";}
+.login-text span.right-btn{width:15%; height:45px; overflow:hidden;}
+.login-text span.right-btn .login-redbtn{width:80px; height:24px; border-radius:3px; background:#fff; border:1px solid #00aaee; padding:0 5px; display:inline-block; text-align:center; font:13px/23px "微软雅黑"; color:#00aaee;}
+
+/*预约-弹出框*/
+.am-popup{width:100%; border-radius:0; bottom:0; left:0; position:fixed; z-index:1110; -webkit-transform:translateY(100%); -ms-transform:translateY(100%); transform:translateY(100%); -webkit-transition:-webkit-transform 300ms; transition:transform 300ms;}
+.am-modal-active{transform:translateY(0px); -webkit-transform:translateY(0); -ms-transform:translateY(0); transform:translateY(0);}
+.am-modal-out{z-index:1109; -webkit-transform:translateY(100%); -ms-transform:translateY(100%); transform:translateY(100%);}
+.popupbg{background-color:rgba(0, 0, 0, 0.6); bottom:0; height:100%; left:0; opacity:0; position:fixed; right:0; top:0; width:100%; z-index:1100; display:none;}
+.popupbg-active {opacity:1; display:block;}
+
+.greenbtn{display:inline-block;}
+
+/*预约弹出框内容*/
+.evaluate-sharebox{width:94%; background:#fff;}
+.am-popup-box{width:94%; display:block; padding:5% 3%; position:relative; font:14px/28px "微软雅黑"; color:#333;}
+.am-popup-box a{color:#333;}
+.btnbox_share{width:87%; padding:0 3%; margin:10px auto;}
+.graybtn_share{width:100%; height:40px; border-radius:3px; background:#ededed; border:1px solid #ccc; display:inline-block; text-align:center; font:15px/40px "微软雅黑"; color:#333;}
+
+.cg_table {
+	 width:100%;
+	 background:#fff;
+}
+.cg_table td.td_small {
+	  text-align:center; font:13px/40px "微软雅黑"; color:#bebebe;
+	  border-top:1px #eeefee solid;
+}
+.cg_table td.td_big {
+	  text-align:center; font:15px/40px "微软雅黑"; color:#8b8b8b;
+}
+.cg_table td.td_hover {
+	  text-align:center; font:16px/40px "微软雅黑"; color:#2d2d2d;
+	  background:#fbfbfb;
+	  border-left:3px #00aaee  solid;
+	  border-top:1px #eeefee solid;
+	  border-bottom:1px #eeefee solid;
+}
