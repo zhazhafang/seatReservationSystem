@@ -226,4 +226,24 @@ public class UsersImpl {
         request.attribute("recordOne", records);
 
     }
+
+    public void sendMessage(Request request, int userId, String sendMessage) {
+        /**
+         *
+         * 功能描述: 实现发送信息
+         *
+         * @param: [request, userId, sendMessage]
+         * @return: void
+         * @auther: zimu
+         * @date: 2018/10/30 0:32
+         */
+        Chat chat = new Chat();
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = dateFormat.format(date);
+        chat.setUserId(userId);
+        chat.setSendMessage(sendMessage);
+        chat.setTime(time);
+        Integer flag = chat.save().asInt();
+    }
 }

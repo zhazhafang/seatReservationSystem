@@ -356,4 +356,20 @@ public class IndexController {
         users.getRecord(request, stuId);
         return "/page/getRecord";
     }
+
+    @PostRoute("/sendMessage")
+    public void sendMessage(Request request, @Param int userId, @Param String sendMessage) {
+        /**
+         *
+         * 功能描述: 发送单向信息
+         *
+         * @param: [request, userId, sendMessage]
+         * @return: void
+         * @auther: zimu
+         * @date: 2018/10/30 0:06
+         */
+
+        UsersImpl users = new UsersImpl();
+        users.sendMessage(request, userId, sendMessage);
+    }
 }
