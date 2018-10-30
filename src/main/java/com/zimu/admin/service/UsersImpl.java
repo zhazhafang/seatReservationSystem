@@ -246,4 +246,9 @@ public class UsersImpl {
         chat.setTime(time);
         Integer flag = chat.save().asInt();
     }
+
+    public int delChat(Request request, int id) {
+        int flag = delete().from(Chat.class).where("id", id).execute();
+        return flag;
+    }
 }

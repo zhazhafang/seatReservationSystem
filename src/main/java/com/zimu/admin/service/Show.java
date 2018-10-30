@@ -216,4 +216,18 @@ public class Show {
         }
         request.attribute("records", records);
     }
+
+    public void chatList(Request request, Integer page) {
+        /**
+         *
+         * 功能描述: 分页查询聊天记录
+         *
+         * @param: [request, page]
+         * @return: void
+         * @auther: zimu
+         * @date: 2018/10/30 8:45
+         */
+        Page<Chat> chatPage = select().from(Chat.class).order("id desc").page(page, 12);
+        request.attribute("chatList", chatPage);
+    }
 }
