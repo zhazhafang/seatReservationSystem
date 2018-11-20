@@ -110,6 +110,57 @@ public class UsersImpl {
     }
 
     /**
+     *
+     *
+     * @Description: 更新版本
+     * @param: Request request, String content, String version,String updateTime,String download
+     * @return:
+     * @auther: HJ
+     * @date: 2018/10/14 15:14
+     */
+    public JSONObject addVersion(Request request,String version, String content,String download) {
+        JSONObject jsonObject = new JSONObject();
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String time = df.format(date);
+        Version ver  = new Version();
+        ver.setVersion(version);
+        ver.setContent(content);
+        ver.setDownload(download);
+        ver.setUpdateTime(time);
+        Anima.atomic(() -> {
+            Integer  id  = ver.save().asInt();
+        }).catchException(e -> {
+            e.printStackTrace();
+        });
+
+        jsonObject.put("state", 200);
+        jsonObject.put("message", "添加版本成功！");
+        return jsonObject;
+    }
+    /**
+     *
+     *
+     * @Description: 删除版本
+     * @param: Request request, Integer id
+     * @return:
+     * @auther: HJ
+     * @date: 2018/10/14 15:16
+     */
+    public JSONObject delVersion(Request request, Integer id) {
+        int flag = delete().from(Version.class).where("id", id).execute();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("state", 200);
+        if (flag > 0) {
+
+            jsonObject.put("message", "删除成功！");
+        }else {
+
+            jsonObject.put("message", "删除失败！");
+        }
+        return jsonObject;
+    }
+    /**
      * @Description: 生成授权码
      * @param: Request request
      * @return: JSONObject

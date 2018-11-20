@@ -119,6 +119,20 @@ public class Show {
     /**
      *
      *
+     * @Description: 显示版本更新记录
+     * @param: Request request,Integer page
+     * @return:
+     * @auther: HJ
+     * @date: 2018/10/14 15:51
+     */
+    public void showVersion(Request request,Integer page){
+        Page<Version> versions =select().from(Version.class).page(page, 12);
+        System.out.println(versions);
+        request.attribute("versions", versions);
+    }
+    /**
+     *
+     *
      * @Description: 分页显示授权码
      * @param: Request request, Integer page
      * @return: void

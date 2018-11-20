@@ -209,6 +209,55 @@ public class IndexController {
         JSONObject jsonObject = users.delNotice(request, id);
         return jsonObject;
     }
+    /**
+     *
+     * 
+     * @Description: 版本列表
+     * @param: request
+     * @return: 
+     * @auther: HJ
+     * @date: 2018/10/14 16:02
+     */
+    @GetRoute("/version")
+    public String updateVersion(Request request) {
+        Integer showVersion = Integer.valueOf(request.query("page", "1"));
+        Show show = new Show();
+        show.showVersion(request, showVersion);
+        return "/page/updateVersion";
+    }
+    /**
+     *
+     * 
+     * @Description: 添加版本
+     * @param: Request request, String context,  String version, String updateTime, String download
+     * @return: 
+     * @auther: HJ
+     * @date: 2018/10/14 16:02
+     */
+    @PostRoute("/addVersion")
+    @JSON
+    public JSONObject addVersion(Request request, @Param String version, @Param String content,@Param String download){
+        UsersImpl users = new UsersImpl();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject = users.addVersion(request,version, content, download);
+        return jsonObject;
+    }
+    /**
+     *
+     * 
+     * @Description: 删除版本
+     * @param: Request request, Integer id
+     * @return: 
+     * @auther: HJ
+     * @date: 2018/10/14 15:21
+     */
+    @PostRoute("delVersion")
+    @JSON
+    public JSONObject delVersion(Request request, @Param Integer id) {
+        UsersImpl users = new UsersImpl();
+        JSONObject jsonObject = users.delVersion(request, id);
+        return jsonObject;
+    }
 
     /**
      * @Description: 授权码

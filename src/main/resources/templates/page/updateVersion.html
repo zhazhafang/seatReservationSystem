@@ -1,0 +1,227 @@
+#include("header.html", {title : "版本更新"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div> 
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i> 
+                        <i class="l_t_line"></i> 
+                    </div> 
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i> 
+                        <i class="r_t_line"></i> 
+                    </div> 
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i> 
+                        <i class="b_l_line"></i> 
+                    </div> 
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i> 
+                        <i class="b_r_line"></i> 
+                    </div> 
+                    <div class="main_title">
+                         版本更新
+                    </div>
+
+                    <div id="versions" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+                        <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
+                        style="background-color: rgb(12, 27, 45);">更新版本</button>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>内容</th>
+                                <th>版本</th>
+                                <th>更新时间</th>
+                                <th>更新链接</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(Version ver : versions.rows)
+                            <tr>
+                                <td>${for.index}</td>
+                                <td  data-method="confirmTrans" onclick="setContent(`${ver.content}`)">
+                                    <a style="color: #fff;">${ver.content.substring(0,10)}...</a>
+                                </td>
+                                <td>${ver.version}</td>
+                                <td>${ver.updateTime}</td>
+                                <td data-method="confirmTrans" onclick="setContent(`${ver.download}`">
+                                    <a style="color: #fff;">${ver.content.substring(0,10)}...</a>
+                                </td>
+                                <td> <a onclick="delVersion(${ver.id});" style="color: #fff;">删除</a></td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+                        <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加用户的模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content" style="background-color:rgba(12, 27, 45, 0.3); color: #fff;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        更新版本
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">新版本</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="version" id="version" lay-verify="version" autocomplete="off" placeholder="请输入新版本" class="layui-input"
+                                style="background-color: rgba(12, 27, 45, 0.3);">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">版本内容</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请输入内容" class="layui-textarea" id="content" style="background-color:rgba(12, 27, 45, 0.3); "></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载链接</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="download" id="download" lay-verify="download" autocomplete="off" placeholder="请输入下载链接" class="layui-input"
+                                       style="background-color: rgba(12, 27, 45, 0.3);">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="addVersion();">
+                        添加
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="/static/layui/layui.js"></script>
+    <script>
+
+        var msg = "";
+        function setContent(ob) {
+            msg =ob;
+        }
+        layui.use(['laypage', 'layer'], function(){
+            var $ = layui.jquery, layer = layui.layer;
+            var laypage = layui.laypage
+                ,layer = layui.layer;
+            //自定义样式
+            laypage.render({
+                elem: 'demo2'
+                ,count: ${versions.totalRows}
+                ,limit: 12
+                ,curr : ${versions.pageNum}
+                ,theme : '#0C1B2D'
+                ,jump: function(obj, first) {
+                    //obj包含了当前分页的所有参数，比如：
+                    if(!first){
+                        //do something
+                        window.location="ver?page="+obj.curr;
+                    }
+                }
+            });
+            // laypage.render({
+            //     elem: 'demo20'
+            //     ,count: data.length
+            //     ,jump: function(obj){
+            //         //模拟渲染
+            //         document.getElementById('biuuu_city_list').innerHTML = function(){
+            //             var arr = []
+            //                 ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
+            //             layui.each(thisData, function(index, item){
+            //                 arr.push('<li>'+ item +'</li>');
+            //             });
+            //             return arr.join('');
+            //         }();
+            //     }
+            // });
+            var active = {
+                confirmTrans: function(){
+                    //配置一个透明的询问框
+                    layer.msg(msg, {
+                        time: 20000, //20s后自动关闭
+                        btn: ['关闭']
+                    });
+                }
+            };
+
+            $('#versions td').on('click', function(){
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+
+        });
+        function delVersion(ob) {
+            alert(ob);
+            $.post("/delVersion",{
+                id : ob
+            }, function (data, status) {
+                alert(data.message);
+                window.location.reload();
+            })
+        }
+        function addVersion() {
+            var version = $('#version').val();
+            var content = $('#content').val();
+            var download = $('#download').val();
+            $.post("/addVersion",{
+                version : version,
+                content : content,
+                download:download
+            }, function (data, status) {
+                alert(data.message);
+                window.location.reload();
+            });
+        }
+    </script>
+#include("footer.html")
