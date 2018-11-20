@@ -1,0 +1,163 @@
+#include("header.html", {title : "聊天信息列表"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div> 
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i> 
+                        <i class="l_t_line"></i> 
+                    </div> 
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i> 
+                        <i class="r_t_line"></i> 
+                    </div> 
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i> 
+                        <i class="b_l_line"></i> 
+                    </div> 
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i> 
+                        <i class="b_r_line"></i> 
+                    </div> 
+                    <div class="main_title">
+                         聊天信息列表
+                    </div>
+
+                    <div id="ACode" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col width="150">
+                                <col width="200">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>用户id</th>
+                                <th>发送信息</th>
+                                <th>接收信息</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(Chat chat : chatList.rows)
+                            <tr>
+                                <td>${for.index}</td>
+                                <td>${chat.userId}</td>
+                                <td  data-method="confirmTrans" onmouseover="setContent(`${chat.sendMessage}`);">
+                                    <a style="color: #fff;">
+                                        #if(chat.sendMessage.length() < 10)
+                                        ${chat.sendMessage}
+                                        #else
+                                        ${chat.sendMessage.substring(0,9)}...
+                                        #end
+                                    </a>
+                                </td>
+                                <td data-method="confirmTrans" onmouseover="setContent(`${chat.receiveMessage}`);">
+                                    <a style="color: #fff;">
+                                        #if(chat.receiveMessage)
+                                            #if(chat.receiveMessage.length() < 10)
+                                            ${chat.receiveMessage}
+                                            #else
+                                            ${chat.receiveMessage.substring(0,7)}...
+                                            #end
+                                        #end
+                                        </a></td>
+                                <td>${chat.time}</td>
+                                <td> <a onclick="delACode(${chat.id});" style="color: #fff;">删除</a></td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+                        <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/layui/layui.js"></script>
+    <script>
+
+        var msg = "";
+        function setContent(ob) {
+            msg = ob;
+        }
+        layui.use(['laypage', 'layer'], function(){
+            var $ = layui.jquery, layer = layui.layer;
+            var laypage = layui.laypage
+                ,layer = layui.layer;
+            //自定义样式
+            laypage.render({
+                elem: 'demo2'
+                ,count: ${chatList.totalRows}
+                ,limit: 12
+                ,curr : ${chatList.pageNum}
+                ,theme : '#0C1B2D'
+                ,jump: function(obj, first) {
+                    //obj包含了当前分页的所有参数，比如：
+                    if(!first){
+                        //do something
+                        window.location="notice?page="+obj.curr;
+                    }
+                }
+            });
+            var active = {
+                confirmTrans: function(){
+                    //配置一个透明的询问框
+                    layer.msg(msg, {
+                        time: 20000, //20s后自动关闭
+                        btn: ['关闭']
+                    });
+                }
+            };
+
+            $('#ACode td').on('click', function(){
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+
+        });
+        function delACode(ob) {
+            $.post("/delChat",{
+                id : ob
+            }, function (data, status) {
+                alert(data.message);
+                window.location.reload();
+            })
+        }
+    </script>
+#include("footer.html")

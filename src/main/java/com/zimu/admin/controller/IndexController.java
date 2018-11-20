@@ -405,4 +405,64 @@ public class IndexController {
         users.getRecord(request, stuId);
         return "/page/getRecord";
     }
+
+    @PostRoute("/sendMessage")
+    public void sendMessage(Request request, @Param int userId, @Param String sendMessage) {
+        /**
+         *
+         * 功能描述: 发送单向信息
+         *
+         * @param: [request, userId, sendMessage]
+         * @return: void
+         * @auther: zimu
+         * @date: 2018/10/30 0:06
+         */
+
+        UsersImpl users = new UsersImpl();
+        users.sendMessage(request, userId, sendMessage);
+    }
+
+    @GetRoute("/chatList")
+    public String chatList(Request request) {
+        /**
+         *
+         * 功能描述: 获取聊天列表
+         *
+         * @param: [request]
+         * @return: java.lang.String
+         * @auther: zimu
+         * @date: 2018/10/30 8:28
+         */
+
+        Integer page = request.queryInt("page", 1);
+        Show show = new Show();
+        show.chatList(request, page);
+        return "/page/chatList";
+    }
+
+    @PostRoute("/delChat")
+    @JSON
+    public JSONObject delChat(Request request, @Param int id) {
+        /**
+         *
+         * 功能描述: 删除聊天记录
+         *
+         * @param: [request, id]
+         * @return: java.lang.String
+         * @auther: zimu
+         * @date: 2018/10/30 9:13
+         */
+        UsersImpl users = new UsersImpl();
+        int flag = users.delChat(request, id);
+        JSONObject object = new JSONObject();
+        object.put("status", 200);
+        if (flag == 1) {
+            object.put("message", "删除成功！");
+            return object;
+        } else {
+            object.put("message", "删除失败！");
+            return object;
+        }
+    }
+
 }

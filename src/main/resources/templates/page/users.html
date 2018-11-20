@@ -55,7 +55,7 @@
                     <div id="users" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
                         <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
                         style="background-color: rgb(12, 27, 45);">添加用户</button>
-                        <table class="layui-table">
+                        <table class="layui-table" id="sendMessage">
                             <colgroup>
                                 <col width="150">
                                 <col width="150">
@@ -68,6 +68,7 @@
                                 <th>学号</th>
                                 <th>联系方式</th>
                                 <th>操作</th>
+                                <th>消息</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,6 +78,7 @@
                                 <td>${user.stuID}</td>
                                 <td>${user.tel}</td>
                                 <td> <a onclick="delUser(${user.id});" style="color: #fff;">删除</a></td>
+                                <td data-method="setTop" onmouseover="setId(${user.id});"><a><i class="fa fa-wechat" style="color: #ba970b"></i></a></td>
                             </tr>
                             #end
                             </tbody>
@@ -125,9 +127,12 @@
 
     <script src="/static/layui/layui.all.js"></script>
     <script>
+        var id ;
+
         layui.use(['laypage', 'layer'], function(){
             var laypage = layui.laypage
                 ,layer = layui.layer;
+
             //自定义样式
             laypage.render({
                 elem: 'demo2'
@@ -143,21 +148,51 @@
                     }
                 }
             });
-            laypage.render({
-                elem: 'demo20'
-                ,count: data.length
-                ,jump: function(obj){
-                    //模拟渲染
-                    document.getElementById('biuuu_city_list').innerHTML = function(){
-                        var arr = []
-                            ,thisData = data.concat().splice(obj.curr*obj.limit - obj.limit, obj.limit);
-                        layui.each(thisData, function(index, item){
-                            arr.push('<li>'+ item +'</li>');
-                        });
-                        return arr.join('');
-                    }();
+            //-------------------------------------------------
+            //触发事件
+            var active = {
+                setTop: function(){
+                    var that = this;
+                    //多窗口模式，层叠置顶
+                    layer.open({
+                        type: 1 //此处以iframe举例
+                        ,title: '请输入消息内容：'
+                        ,area: [$(window).width()/2+'px',
+                            '300px']
+                        ,shade: 0
+                        ,maxmin: true
+                        ,offset: [ //为了演示，随机坐标
+                            150
+                            ,0
+                        ]
+                        ,content: '<form class="layui-form">  <div class="layui-form-item layui-form-text">\n' +
+                            '    <div class="layui-input-block" style="margin-top: 5%;margin-left: 0%;">\n' +
+                            '      <textarea placeholder="请输入内容" id="content" class="layui-textarea"></textarea>\n' +
+                            '    </div>\n' +
+                            '  </div></form>'
+                        ,btn: ['发送', '关闭'] //只是为了演示
+                        ,btn1: function(){
+                            sendMessage();
+                            alert("发送成功！");
+                            layer.closeAll();
+                        }
+                        ,btn2: function(){
+                            layer.closeAll();
+                        }
+
+                        ,zIndex: layer.zIndex //重点1
+                        ,success: function(layero){
+                            layer.setTop(layero); //重点2
+                        }
+                    });
                 }
+            };
+
+            $('#users td').on('click', function(){
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
             });
+            //-------------------------------------------------
 
         });
         function delUser(ob) {
@@ -176,6 +211,9 @@
                 alert(data.message);
                 window.location.reload();
             })
+        }
+        function  setId(ob) {
+            id = ob;
         }
     </script>
 #include("footer.html")
