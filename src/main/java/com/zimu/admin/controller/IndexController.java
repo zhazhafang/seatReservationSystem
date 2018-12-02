@@ -465,4 +465,17 @@ public class IndexController {
         }
     }
 
+    @PostRoute("/getUserInfoFromSchool")
+    public JSONObject getUserInfoFromSchool(Request request, @Param String stuId) {
+        String params = "{\"intf_code\" : \"QRY_USER\",\n" +
+                "                \"params\" : {\n" +
+                "            \"userPhysicalCard\": \""+stuId+"\"\n" +
+                "            }}";
+        JSONObject jsonObject = new JSONObject();
+        UsersImpl users = new UsersImpl();
+        int flag = users.getUserInfoFromSchool(request, params);
+
+        return jsonObject;
+    }
+
 }

@@ -53,15 +53,16 @@
                     </div>
 
                     <div id="ACode" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
-                        <form class="layui-form" method="post" action="/allUsers">
+                        <form class="layui-form" method="post" id="myForm" action="/allUsers">
                             <div class="layui-form-item">
                                 <label class="layui-form-label" style="color: white;">学号</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
                                            style="background-color: rgba(12, 27, 45, 0.3);color: white;">
                                 </div>
-                                <div class="layui-input-block" style="margin-left: 49%;margin-top: 1%;">
-                                    <button type="submit" class="layui-btn layui-btn-primary">查询</button>
+                                <div class="layui-input-block" style="margin-left: 39%;margin-top: 1%;">
+                                    <button type="submit" class="layui-btn layui-btn-primary">本库查询</button>
+                                    <button type="button" onclick="selectFromSchool()" class="layui-btn layui-btn-primary">外库查询</button>
                                 </div>
                             </div>
                         </form>
@@ -142,10 +143,5 @@
             </div>
         </div>
     </div>
-
     <script src="/static/layui/layui.js"></script>
-    <script>
-
-
-    </script>
 #include("footer.html")

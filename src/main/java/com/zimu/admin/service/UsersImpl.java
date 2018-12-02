@@ -7,6 +7,11 @@ import io.github.biezhi.anima.Anima;
 
 import javax.xml.crypto.Data;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -301,5 +306,33 @@ public class UsersImpl {
     public int delChat(Request request, int id) {
         int flag = delete().from(Chat.class).where("id", id).execute();
         return flag;
+    }
+
+    public int getUserInfoFromSchool(Request request, String params) {
+        /**
+         *
+         * 功能描述: 实现外库查询
+         *
+         * @param: [request, params]
+         * @return: int
+         * @auther: zimu
+         * @date: 2018/12/2 8:54
+         */
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+            String result = br.readLine();
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
+            request.attribute("stuInfo", jsonObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
