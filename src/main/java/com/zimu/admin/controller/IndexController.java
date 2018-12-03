@@ -467,6 +467,15 @@ public class IndexController {
 
     @PostRoute("/getUserInfoFromSchool")
     public JSONObject getUserInfoFromSchool(Request request, @Param String stuId) {
+        /**
+         *
+         * 功能描述: 获取用户信息
+         *
+         * @param: [request, stuId]
+         * @return: com.alibaba.fastjson.JSONObject
+         * @auther: zimu
+         * @date: 2018/12/2 10:09
+         */
         String params = "{\"intf_code\" : \"QRY_USER\",\n" +
                 "                \"params\" : {\n" +
                 "            \"userPhysicalCard\": \""+stuId+"\"\n" +
@@ -476,6 +485,17 @@ public class IndexController {
         int flag = users.getUserInfoFromSchool(request, params);
 
         return jsonObject;
+    }
+
+    @PostRoute("/getRecordFromSchool")
+    public String getRecordFromSchool(Request request, @Param String stuId) {
+        String params = "{\"intf_code\" : \"QRY_RECORD\",\n" +
+                "                \"params\" : {\n" +
+                "            \"userPhysicalCard\": \""+stuId+"\"\n" +
+                "            }}";
+        UsersImpl users = new UsersImpl();
+        users.getRecordFromSchool(request, params);
+        return "/page/getRecord";
     }
 
 }

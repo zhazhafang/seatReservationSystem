@@ -105,7 +105,7 @@
                             </tbody>
                         </table>
                         #else<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                        <legend style="color: white;">查询学号：${stuId}</legend>
+                        <legend style="color: white;">查询学号：${stuId}.(只查询最新10条记录)</legend>
                     </fieldset>
                         <ul class="layui-timeline">
                             <li class="layui-timeline-item">
@@ -114,6 +114,7 @@
                                     <div class="layui-timeline-title" style="color: white;">未来在继续……</div>
                                 </div>
                             </li>
+                            #if(recordOne!="")
                             #for(AllRecord record : recordOne)
                             <li class="layui-timeline-item">
                                 <i class="layui-icon layui-timeline-axis" style="color: red;"></i>
@@ -140,7 +141,7 @@
                                 </div>
                             </li>
                             #end
-
+                            #end
                             <li class="layui-timeline-item">
                                 <i class="layui-icon layui-timeline-axis" style="color: red;"></i>
                                 <div class="layui-timeline-content layui-text">
@@ -169,7 +170,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form class="layui-form" action="/getRecord" id="myform" method="post">
+                    <form class="layui-form" action="/getRecord" id="recordForm" method="post">
                         <div class="layui-form-item">
                             <label class="layui-form-label">学号</label>
                             <div class="layui-input-block">
@@ -183,8 +184,11 @@
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">关闭
                     </button>
-                    <button type="submit" class="btn btn-primary" onclick="$('#myform').submit();">
-                        查询
+                    <button type="submit" class="btn btn-primary" onclick="$('#recordForm').submit();">
+                        本库查询
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="selectRecordFromSchool()">
+                        外库查询
                     </button>
                 </div>
             </div><!-- /.modal-content -->

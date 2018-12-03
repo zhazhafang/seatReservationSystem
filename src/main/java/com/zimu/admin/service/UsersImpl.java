@@ -265,22 +265,36 @@ public class UsersImpl {
      * @date: 2018/10/10 15:57
      */
     public void getRecord(Request request, String stuId) {
+        /**
+         *
+         * 功能描述: 获取本库记录
+         *
+         * @param: [request, stuId]
+         * @return: void
+         * @auther: zimu
+         * @date: 2018/12/2 10:08
+         */
         String time = "";
         Date date;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         StuInfo info = select().from(StuInfo.class).where("userPhysicalCard", stuId).one();
-        String userId = info.getUserId();
-        List<AllRecord> records = select().from(AllRecord.class).where("userId", userId).all();
-
-        for (AllRecord record : records) {
-            time = record.getAppointmentDate();
-            date=new Date(Long.parseLong(time));
-            time=df.format(date);
-            record.setAppointmentDate(time);
+        if (info != null) {
+            String userId = info.getUserId();
+            List<AllRecord> records = select().from(AllRecord.class).where("userId", userId).order("id desc").limit(10);
+            for (AllRecord record : records) {
+                time = record.getAppointmentDate();
+                date=new Date(Long.parseLong(time));
+                time=df.format(date);
+                record.setAppointmentDate(time);
+            }
+            request.attribute("stuId", stuId);
+            request.attribute("recordOne", records);
+            System.out.println(records);
         }
-        request.attribute("stuId", stuId);
-        request.attribute("recordOne", records);
-
+        else {
+            request.attribute("stuId", stuId);
+            request.attribute("recordOne", "");
+        }
     }
 
     public void sendMessage(Request request, int userId, String sendMessage) {
@@ -304,6 +318,15 @@ public class UsersImpl {
     }
 
     public int delChat(Request request, int id) {
+        /**
+         *
+         * 功能描述: 删除聊天记录
+         *
+         * @param: [request, id]
+         * @return: int
+         * @auther: zimu
+         * @date: 2018/12/2 10:08
+         */
         int flag = delete().from(Chat.class).where("id", id).execute();
         return flag;
     }
@@ -334,5 +357,25 @@ public class UsersImpl {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public void getRecordFromSchool(Request request, String params) {
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+            connection.setRequestProperty("Cookie","JSESSIONID=1C758768A7150B626A4B3BB70CAB2800");
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String result = br.readLine();
+            JSONObject jsonObject = (JSONObject) ((JSONObject) JSONObject.parse(result)).get("result_data");
+            System.out.println(jsonObject.get("result_data"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
