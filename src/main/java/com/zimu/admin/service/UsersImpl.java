@@ -13,9 +13,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static io.github.biezhi.anima.Anima.delete;
 import static io.github.biezhi.anima.Anima.select;
@@ -359,23 +357,80 @@ public class UsersImpl {
         return 0;
     }
 
-    public void getRecordFromSchool(Request request, String params) {
+    public void getRecordFromSchool(Request request, String params, String cookie) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
-            connection.setRequestProperty("Cookie","JSESSIONID=1C758768A7150B626A4B3BB70CAB2800");
+            connection.setRequestProperty("Cookie",cookie);
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.getOutputStream().write(params.getBytes());
             connection.connect();
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String result = br.readLine();
-            JSONObject jsonObject = (JSONObject) ((JSONObject) JSONObject.parse(result)).get("result_data");
-            System.out.println(jsonObject.get("result_data"));
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
+            if (jsonObject.get("result_code").equals("2")) {
+                request.attribute("flag", 2);
+            }else {
+                request.attribute("flag", 1);
+                JSONObject result_data = (JSONObject) jsonObject.get("result_data");
+                List rows = (List) result_data.get("rows");
+                int i = 1;
+                List<AllRecord> records = new ArrayList();
+                for (Object row : rows) {
+                    JSONObject rowJson = (JSONObject) JSONObject.toJSON(row);
+                    AllRecord record = new AllRecord();
+                    record.setAppointmentDate(df.format(new Date(Long.parseLong(rowJson.get("appointmentDate")+""))));
+                    record.setRoomName((String) rowJson.get("roomName"));
+                    record.setSeatNo((String) rowJson.get("seatNo"));
+                    record.setStatTime((String) rowJson.get("statTime"));
+                    record.setStatus((Integer) rowJson.get("status"));
+
+                    records.add(record);
+                    if (i == 10) {
+                        break;
+                    }
+                    i++;
+                }
+                request.attribute("recordOne", records);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public JSONObject toLogin(Request request, String params) {
+        JSONObject returnObject = new JSONObject();
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            Map map = connection.getHeaderFields();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String result = br.readLine();
+            JSONObject object = (JSONObject) JSONObject.parse(result);
+            if(object.get("result_code").equals("0")){
+                String cookie = map.get("Set-Cookie").toString().split(";")[0].substring(1);
+                returnObject.put("status", 1);
+                returnObject.put("message", "登录成功！");
+                returnObject.put("setCookie", cookie);
+            }else {
+                returnObject.put("status", 2);
+                returnObject.put("message", object.get("result_desc"));
+                returnObject.put("setCookie", null);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnObject;
     }
 }

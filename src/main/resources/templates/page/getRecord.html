@@ -6,8 +6,10 @@
         color: #fff;
     }
 </style>
-<body>
+<body onload="checkLogin();">
     <!--header-->
+    <input type="hidden" id="flag" value="${flag}">
+    <div style="display: none;" data-method="setTop" id="tips"></div>
     <div class="header">
         <div class="bg_header">
             <div class="header_nav fl t_title">
@@ -55,7 +57,7 @@
                     <div id="ACode" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
                         <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
                         style="background-color: rgb(12, 27, 45);">查询预定记录</button>
-                        #if(recordOne==null)
+                        #if(recordOne==null&&flag==null)
                         <table class="layui-table">
                             <colgroup>
                                 <col width="150">
@@ -176,6 +178,7 @@
                             <div class="layui-input-block">
                                 <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
                                 style="background-color: rgba(12, 27, 45, 0.3);">
+                                <input type="hidden" id="setCookie" name="cookie" value="">
                             </div>
                         </div>
                     </form>
@@ -198,24 +201,12 @@
     <script src="/static/layui/layui.js"></script>
     <script>
 
-        var msg = "";
-        function setContent(ob) {
-            msg = "";
-            $.post("/getACStuId", {
-                id : ob
-            }, function (data, status) {
-                msg = "";
-                for (var key in data){
-                    msg = msg + data[key] + "<br>";
-                }
-            })
-        }
         layui.use(['laypage', 'layer'], function(){
             var $ = layui.jquery, layer = layui.layer;
             var laypage = layui.laypage
                 ,layer = layui.layer;
             //自定义样式
-            #if(recordOne==null)
+            #if(recordOne==null && flag==null)
             laypage.render({
                 elem: 'demo2'
                 ,count: ${records.totalRows}
@@ -231,6 +222,7 @@
                 }
             });
             #end
+            var msg = "123";
             var active = {
                 confirmTrans: function(){
                     //配置一个透明的询问框

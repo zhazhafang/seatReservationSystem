@@ -5,10 +5,12 @@ import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.Request;
 import com.zimu.admin.entity.AllRecord;
 import com.zimu.admin.entity.Record;
+import com.zimu.admin.service.Md5;
 import com.zimu.admin.service.Show;
 import com.zimu.admin.service.UsersImpl;
 import sun.nio.cs.ext.MacDingbat;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -488,14 +490,38 @@ public class IndexController {
     }
 
     @PostRoute("/getRecordFromSchool")
-    public String getRecordFromSchool(Request request, @Param String stuId) {
+    public String getRecordFromSchool(Request request, @Param String stuId,@Param String cookie) {
         String params = "{\"intf_code\" : \"QRY_RECORD\",\n" +
                 "                \"params\" : {\n" +
                 "            \"userPhysicalCard\": \""+stuId+"\"\n" +
                 "            }}";
         UsersImpl users = new UsersImpl();
-        users.getRecordFromSchool(request, params);
+        users.getRecordFromSchool(request, params, cookie);
+        request.attribute("stuId", stuId);
         return "/page/getRecord";
+    }
+
+    @JSON
+    @PostRoute("/toLogin")
+    public JSONObject toLogin(Request request, @Param String stuId, @Param String password) {
+        String tversion = String.valueOf(new Date().getTime());
+        JSONObject jsonObject = new JSONObject();
+        Md5 md5 = new Md5();
+        String md5username = md5.getMd5(stuId+"_"+tversion);
+        String params = "{\n" +
+                "                    \"intf_code\" : \"QRY_LOGIN\",\n" +
+                "                        \"params\" : {\n" +
+                "                            \"userPhysicalCard\":\""+stuId+"\",\n" +
+                "                            \"password\":"+password+",\n" +
+                "                            \"imei\":\""+stuId+"\",\n" +
+                "                            \"version\":\"5.0\",\n" +
+                "                            \"tversion\":"+tversion+",\n" +
+                "                            \"md5username\":\""+md5username+"\"\n" +
+                "                        }\n" +
+                "                    }";
+        UsersImpl users = new UsersImpl();
+        jsonObject = users.toLogin(request, params);
+        return jsonObject;
     }
 
 }
