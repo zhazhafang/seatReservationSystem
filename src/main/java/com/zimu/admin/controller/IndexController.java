@@ -3,6 +3,7 @@ package com.zimu.admin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.Request;
+import com.blade.mvc.http.Response;
 import com.zimu.admin.entity.AllRecord;
 import com.zimu.admin.entity.Record;
 import com.zimu.admin.service.Md5;
@@ -522,6 +523,50 @@ public class IndexController {
         UsersImpl users = new UsersImpl();
         jsonObject = users.toLogin(request, params);
         return jsonObject;
+    }
+
+    @GetRoute("/other")
+    public String other() {
+        Show show = new Show();
+        return "page/other";
+    }
+
+    @GetRoute("/clean")
+    public String clean(Request request) {
+        Show show = new Show();
+        show.showDBs(request);
+        return "page/clean";
+    }
+
+    @GetRoute("/getVcode")
+    public int getVcode(Request request, Response response){
+        UsersImpl users = new UsersImpl();
+        users.getVcode(request, response);
+        return 1;
+    }
+
+    @JSON
+    @PostRoute("/checkVcode")
+    public JSONObject checkVcode(Request request, @Param String vcode) {
+        String yzm = request.session().attribute("code");
+        if (yzm.equals(vcode)) {
+            return (JSONObject) JSONObject.parse("{ \"data\": 1}");
+        }
+        return (JSONObject) JSONObject.parse("{ \"data\": 0}");
+    }
+
+    @JSON
+    @PostRoute("/doDelDBData")
+    public JSONObject doDelDBData(Request request, @Param int count, @Param String dbname) {
+        UsersImpl users = new UsersImpl();
+        int flag = users.doDelDBData(request, count, dbname);
+        if (flag == 1) {
+            JSONObject object = (JSONObject) JSONObject.parse("{ \"message\": \"" + count + "条记录删除成功！\"}");
+            return object;
+        } else {
+            JSONObject object = (JSONObject) JSONObject.parse("{ \"message\": \"" + count + "条记录删除失败！\"}");
+            return object;
+        }
     }
 
 }

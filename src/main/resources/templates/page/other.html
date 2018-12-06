@@ -1,0 +1,101 @@
+#include("header.html", {title : "其他功能"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div>
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i>
+                        <i class="l_t_line"></i>
+                    </div>
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i>
+                        <i class="r_t_line"></i>
+                    </div>
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i>
+                        <i class="b_l_line"></i>
+                    </div>
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i>
+                        <i class="b_r_line"></i>
+                    </div>
+                    <div class="main_title">
+                         功能列表
+                    </div>
+
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;width: 300px;">
+                        <legend style="color: #fff;">此模块功能使用需谨慎！</legend>
+                    </fieldset>
+
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="color: #fff;">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">修改密码</li>
+                            <li>取消预订</li>
+                            <li>修改信息</li>
+                            <li>未完待续…</li>
+                        </ul>
+                        <div class="layui-tab-content" style="height: 100px;">
+                            <div class="layui-tab-item layui-show">这个功能不想在这里实现了，需要的话可以依据教程去实现。</div>
+                            <div class="layui-tab-item">
+                                <div class="layui-form-item" style="margin-top: 35px;">
+                                    <label class="layui-form-label" style="width: 110px;">预订记录ID:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入id" class="layui-input" style="background:none;width: 150px;">
+                                    </div>
+                                    <div class="layui-form-item" style="margin-top: 30px;">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit="" lay-filter="demo1">取消预订</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">内容3</div>
+                            <div class="layui-tab-item">内容4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/layui/layui.js"></script>
+    <script>
+        layui.use('element', function(){
+            var $ = layui.jquery
+                ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            $('.site-demo-active').on('click', function(){
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
+        });
+    </script>
+
+#include("footer.html")

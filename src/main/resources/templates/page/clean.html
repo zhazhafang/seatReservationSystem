@@ -1,0 +1,95 @@
+#include("header.html", {title : "数据清理"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="bg_header">
+            <div class="header_nav fl t_title">
+                一点通座位预定系统
+            </div> 
+        </div>
+        <div class="header_nav fl">
+        </div>
+        <div class="header_myself fr t_height">
+            <a class="t_a" href="/">返回 &nbsp;</a>
+        </div>
+    </div>
+    <!--main-->
+    <div class="data_content">
+        <div class="data_main">
+            <div class="main_left fl">
+               #include("menu.html")
+            </div>
+            <div class="main_center fl">
+                <div class="center_text t_cos0">
+                    <!--左上边框-->
+                    <div class="t_line_box">
+                        <i class="t_l_line"></i> 
+                        <i class="l_t_line"></i> 
+                    </div> 
+                    <!--右上边框-->
+                    <div class="t_line_box">
+                        <i class="t_r_line"></i> 
+                        <i class="r_t_line"></i> 
+                    </div> 
+                    <!--左下边框-->
+                    <div class="t_line_box">
+                        <i class="l_b_line"></i> 
+                        <i class="b_l_line"></i> 
+                    </div> 
+                        <!--右下边框-->
+                        <div class="t_line_box">
+                        <i class="r_b_line"></i> 
+                        <i class="b_r_line"></i> 
+                    </div> 
+                    <div class="main_title">
+                         数据清理
+                    </div>
+
+                    <div id="notices" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+                        <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
+                        style="background-color: rgb(12, 27, 45);">数据清理<span style="color: red;margin-left: 20px;">清理有风险，慎重清理！</span></button>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="100">
+                                <col width="150">
+                                <col width="150">
+                                <col width="150">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>数据库名称</th>
+                                <th>数据量</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            #for(DBS db : dbs)
+                            <tr>
+                                <td>${for.index}</td>
+                                <td>${db.dbname}</td>
+                                <td>${db.count}</td>
+                                <td><a data-method="setTop" id="delDB" onclick="delDbs(`${db.dbname}`)" style="color: #fff;">删除</a></td>
+                            </tr>
+                            #end
+                            </tbody>
+                        </table>
+                        <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/layui/layui.js"></script>
+    <script>
+
+    </script>
+#include("footer.html")

@@ -122,6 +122,7 @@
                                 <i class="layui-icon layui-timeline-axis" style="color: red;"></i>
                                 <div class="layui-timeline-content layui-text">
                                     <div class="layui-timeline-title" style="color: white;">
+                                        id : ${record.id}
                                         时间 ： ${record.appointmentDate}.
                                         自习室 : ${record.roomName}.
                                         座位  ： ${record.seatNo}.
@@ -176,7 +177,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">学号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
+                                <input type="text" name="stuId" id="stuId" value="${stuId}" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
                                 style="background-color: rgba(12, 27, 45, 0.3);">
                                 <input type="hidden" id="setCookie" name="cookie" value="">
                             </div>

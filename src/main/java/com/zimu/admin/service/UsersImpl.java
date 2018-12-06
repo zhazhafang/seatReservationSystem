@@ -2,6 +2,7 @@ package com.zimu.admin.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blade.mvc.http.Request;
+import com.blade.mvc.http.Response;
 import com.zimu.admin.entity.*;
 import io.github.biezhi.anima.Anima;
 
@@ -12,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -382,6 +384,7 @@ public class UsersImpl {
                 for (Object row : rows) {
                     JSONObject rowJson = (JSONObject) JSONObject.toJSON(row);
                     AllRecord record = new AllRecord();
+                    record.setId((Integer) rowJson.get("id"));
                     record.setAppointmentDate(df.format(new Date(Long.parseLong(rowJson.get("appointmentDate")+""))));
                     record.setRoomName((String) rowJson.get("roomName"));
                     record.setSeatNo((String) rowJson.get("seatNo"));
@@ -432,5 +435,18 @@ public class UsersImpl {
             e.printStackTrace();
         }
         return returnObject;
+    }
+
+    public void getVcode(Request request, Response response) {
+        Vcode vcode = new Vcode();
+        vcode.doGet(request,response);
+    }
+
+    public int doDelDBData(Request request, int count, String dbname) {
+        int flag = Anima.execute("DELETE FROM "+dbname+" LIMIT ?",count);
+        if (flag == count) {
+            return 1;
+        }else
+            return 0;
     }
 }

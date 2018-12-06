@@ -244,4 +244,17 @@ public class Show {
         Page<Chat> chatPage = select().from(Chat.class).order("id desc").page(page, 12);
         request.attribute("chatList", chatPage);
     }
+
+    public void showDBs(Request request) {
+        List<String> lists= select().bySQL(String.class, "show tables").all();
+        List<DBS> dbsList = new ArrayList<DBS>();
+        for (String list : lists) {
+            Integer count = select().bySQL(Integer.class, "select count(*) from "+list).one();
+            DBS dbs = new DBS();
+            dbs.setDbname(list);
+            dbs.setCount(count);
+            dbsList.add(dbs);
+        }
+        request.attribute("dbs", dbsList);
+    }
 }
