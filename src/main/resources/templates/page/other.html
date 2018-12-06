@@ -6,7 +6,9 @@
         color: #fff;
     }
 </style>
-<body>
+<body onload="checkLogin();">
+<input type="hidden" id="flag" value="${flag}">
+<div style="display: none;" data-method="setTop" id="tips"></div>
     <!--header-->
     <div class="header">
         <div class="bg_header">
@@ -66,17 +68,20 @@
                         <div class="layui-tab-content" style="height: 100px;">
                             <div class="layui-tab-item layui-show">这个功能不想在这里实现了，需要的话可以依据教程去实现。</div>
                             <div class="layui-tab-item">
+                                <form id="cancelBookForm" action="/cancelBook" method="post">
                                 <div class="layui-form-item" style="margin-top: 35px;">
                                     <label class="layui-form-label" style="width: 110px;">预订记录ID:</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入id" class="layui-input" style="background:none;width: 150px;">
+                                        <input type="text" id="bookId" name="bookId" lay-verify="title" autocomplete="off" placeholder="请输入id" class="layui-input" style="background:none;width: 150px;">
+                                        <input type="hidden" id="cancelCookie" name="cookie" value="">
                                     </div>
                                     <div class="layui-form-item" style="margin-top: 30px;">
                                         <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit="" lay-filter="demo1">取消预订</button>
+                                            <button class="layui-btn" onclick="cancelBook()">取消预订</button>
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                             <div class="layui-tab-item">内容3</div>
                             <div class="layui-tab-item">内容4</div>
@@ -88,9 +93,12 @@
     </div>
     <script src="/static/layui/layui.js"></script>
     <script>
-        layui.use('element', function(){
+        layui.use(['laypage', 'layer', 'element'], function(){
             var $ = layui.jquery
                 ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            var $ = layui.jquery, layer = layui.layer;
+            var laypage = layui.laypage
+                ,layer = layui.layer;
             $('.site-demo-active').on('click', function(){
                 var othis = $(this), type = othis.data('type');
                 active[type] ? active[type].call(this, othis) : '';

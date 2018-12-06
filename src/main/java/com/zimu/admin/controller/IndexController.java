@@ -569,4 +569,12 @@ public class IndexController {
         }
     }
 
+    @PostRoute("/cancelBook")
+    public String cancelBook(Request request, @Param Integer bookId, @Param String cookie) {
+        UsersImpl users = new UsersImpl();
+        String params = "{\"intf_code\" : \"UPD_RECORD\",\"params\" : { \"id\":"+bookId+"}}";
+        users.cancelBook(request, params, cookie);
+        return "/page/other";
+    }
+
 }

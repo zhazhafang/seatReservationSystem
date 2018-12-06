@@ -199,3 +199,10 @@ function doDel(dbname) {
 
     }
 }
+function cancelBook() {
+    var myForm = $('#cancelBookForm');
+    $('#cancelCookie').val(localStorage.cookie);
+    myForm.submit();
+    alert("取消成功！");
+
+}

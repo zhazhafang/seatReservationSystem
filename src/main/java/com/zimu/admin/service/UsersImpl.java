@@ -413,6 +413,7 @@ public class UsersImpl {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+
             connection.setDoOutput(true);
             connection.getOutputStream().write(params.getBytes());
             connection.connect();
@@ -448,5 +449,28 @@ public class UsersImpl {
             return 1;
         }else
             return 0;
+    }
+
+    public void cancelBook(Request request, String params, String cookie) {
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+            connection.setRequestProperty("Cookie",cookie);
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(br.readLine());
+            if (jsonObject.get("result_code").equals("2")) {
+                request.attribute("flag", 2);
+            }
+            else {
+                System.out.println(jsonObject);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

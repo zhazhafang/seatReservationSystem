@@ -90,6 +90,12 @@
     </div>
     <script src="/static/layui/layui.js"></script>
     <script>
-
+        layui.use(['laypage', 'layer', 'element'], function() {
+            var $ = layui.jquery
+                , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            var $ = layui.jquery, layer = layui.layer;
+            var laypage = layui.laypage
+                , layer = layui.layer;
+        });
     </script>
 #include("footer.html")
