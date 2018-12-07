@@ -1,6 +1,6 @@
 function selectUserInfoFromSchool() {
     var myForm = $('#allUserForm');
-    myForm.action = "/getUserInfoFromSchool";
+    myForm.attr("action","getUserInfoFromSchool");
     myForm.submit();
 }
 
@@ -219,10 +219,10 @@ function showForm(stuId, password) {
     $.post("/getUpInfo",{
         stuId: stuId
     },function (msg) {
-        $('#name').val(msg["result_data"]["userName"]);
-        $('#dept').val(msg["result_data"]["dept"]);
-        $('#tel').val(msg["result_data"]["mobile"]);
-        $('#wechat').val(msg["result_data"]["wechat"]);
+        $('#name').val(msg["userName"]);
+        $('#dept').val(msg["dept"]);
+        $('#tel').val(msg["mobile"]);
+        $('#wechat').val(msg["wechat"]);
     });
     $('#upStuId').val(stuId);
     $('#newPsw').val(password);

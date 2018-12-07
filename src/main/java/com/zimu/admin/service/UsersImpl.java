@@ -250,7 +250,7 @@ public class UsersImpl {
      * @date: 2018/10/7 0:01
      */
 
-    public void pAllUsers(Request request, String stuId) {
+    public void AllUsers(Request request, String stuId) {
         StuInfo stuInfo = select().from(StuInfo.class).where("userPhysicalCard", stuId).one();
         request.attribute("stuInfo", stuInfo);
     }
@@ -351,8 +351,9 @@ public class UsersImpl {
             connection.connect();
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
             String result = br.readLine();
+            System.out.println(result);
             JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
-            request.attribute("stuInfo", jsonObject);
+            request.attribute("stuInfo", jsonObject.get("result_data"));
         } catch (Exception e) {
             e.printStackTrace();
         }

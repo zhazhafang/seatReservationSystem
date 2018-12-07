@@ -356,9 +356,9 @@ public class IndexController {
      */
 
     @PostRoute("/allUsers")
-    public String pAllUsers(Request request, @Param String stuId){
+    public String AllUsers(Request request, @Param String stuId){
         UsersImpl users = new UsersImpl();
-        users.pAllUsers(request, stuId);
+        users.AllUsers(request, stuId);
         return "/page/allUsers";
     }
 
@@ -470,7 +470,7 @@ public class IndexController {
     }
 
     @PostRoute("/getUserInfoFromSchool")
-    public JSONObject getUserInfoFromSchool(Request request, @Param String stuId) {
+    public String getUserInfoFromSchool(Request request, @Param String stuId) {
         /**
          *
          * 功能描述: 获取用户信息
@@ -484,11 +484,11 @@ public class IndexController {
                 "                \"params\" : {\n" +
                 "            \"userPhysicalCard\": \""+stuId+"\"\n" +
                 "            }}";
-        JSONObject jsonObject = new JSONObject();
+
         UsersImpl users = new UsersImpl();
         int flag = users.getUserInfoFromSchool(request, params);
 
-        return jsonObject;
+        return "/page/allUsers";
     }
 
     @PostRoute("/getRecordFromSchool")
