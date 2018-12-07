@@ -22,7 +22,7 @@ function initData() {
     });
 
 }
-var svg = d3.select("#svg").append("svg").attr("width", "620").attr("height", "900");
+var svg = d3.select("#svg").append("svg").attr("width", "620").attr("height", "600");
 var padding = {top : 20, bottom : 20, left: 20, right: 20};
 var tooltip = d3.select("body")
     .append("div")

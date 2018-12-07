@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
+import com.mysql.fabric.xmlrpc.base.Params;
 import com.zimu.admin.entity.AllRecord;
 import com.zimu.admin.entity.Record;
 import com.zimu.admin.service.Md5;
@@ -575,6 +576,42 @@ public class IndexController {
         String params = "{\"intf_code\" : \"UPD_RECORD\",\"params\" : { \"id\":"+bookId+"}}";
         users.cancelBook(request, params, cookie);
         return "/page/other";
+    }
+
+    @JSON
+    @PostRoute("/getUpInfo")
+    public JSONObject getUpInfo(Request request, @Param String stuId){
+        JSONObject jsonObject = new JSONObject();
+        UsersImpl users = new UsersImpl();
+        String params = "{\"intf_code\" : \"QRY_USER\",\n" +
+                "                \"params\" : {\n" +
+                "            \"userPhysicalCard\": \""+stuId+"\"\n" +
+                "            }}";
+        users.getUserInfoFromSchool(request, params);
+        jsonObject = request.attribute("stuInfo");
+        return jsonObject;
+    }
+
+    @JSON
+    @PostRoute("/upInfo")
+    public JSONObject upInfo(Request request) {
+        String userPhysicalCard = request.query("userPhysicalCard","");
+        String userName = request.query("userName","");
+        String dept = request.query("dept","");
+        String newPassword = request.query("newPassword","");
+        String confirmPassword = request.query("confirmPassword","");
+        String mobile = request.query("mobile","");
+        String wechat = request.query("wechat","");
+        String cookie = request.query("cookie","");
+
+        String params = "{\"intf_code\":\"UPD_USER\",\"params\":{\"userPhysicalCard\":\""+userPhysicalCard+"\",\"userName\":\""+userName+"\",\"dept\":\""+dept+"\",\"newPassword\":\""+newPassword+"\",\"confirmPassword\":\""+confirmPassword+"\",\"mobile\":\""+mobile+"\",\"wechat\":\""+wechat+"\"}}";
+        UsersImpl users = new UsersImpl();
+        int i = users.upInfo(request, params, cookie);
+        if (i == 1) {
+            return (JSONObject) JSONObject.parse("{ \"message\": \"修改成功！\"}");
+        }else {
+            return (JSONObject) JSONObject.parse("{ \"message\": \"修改失败！\"}");
+        }
     }
 
 }

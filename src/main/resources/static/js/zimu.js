@@ -18,8 +18,7 @@ function checkLogin() {
     }
 }
 
-function showLogin() {
-
+function showLogin(ob) {
         layui.use(['laypage', 'layer'], function(){
             var $ = layui.jquery, layer = layui.layer;
             var laypage = layui.laypage
@@ -53,7 +52,7 @@ function showLogin() {
                         ,content: msg
                         ,btn: ['登录', '关闭'] //只是为了演示
                         ,yes: function(){
-                            $(that).click(toLogin());
+                            $(that).click(toLogin(ob));
                         }
                         ,btn2: function(){
                             layer.closeAll();
@@ -70,9 +69,10 @@ function showLogin() {
             active[method] ? active[method].call(this, othis) : '';
         });
 }
-function toLogin() {
-    var stuId = $('#loginStuId').val();
-    var password = $('#loginPsw').val();
+
+function toLogin(ob) {
+     var stuId = $('#loginStuId').val();
+     var password = $('#loginPsw').val();
     $.post("/toLogin",{
         stuId : stuId,
         password : password
@@ -81,7 +81,10 @@ function toLogin() {
             alert(msg["message"]);
             localStorage.cookie = msg["setCookie"];
             layer.closeAll();
-            selectRecordFromSchool();
+            switch (ob) {
+                case 1:selectRecordFromSchool();break;
+                case 2:showForm(stuId, password);break;
+            }
         }else{
             alert(msg["message"]);
         }
@@ -205,4 +208,47 @@ function cancelBook() {
     myForm.submit();
     alert("取消成功！");
 
+}
+
+function updateLogin() {
+   showLogin(2);
+}
+function showForm(stuId, password) {
+    document.getElementById('upBtn').style.display = "none";
+    document.getElementById('upForm').style.display = "block";
+    $.post("/getUpInfo",{
+        stuId: stuId
+    },function (msg) {
+        $('#name').val(msg["result_data"]["userName"]);
+        $('#dept').val(msg["result_data"]["dept"]);
+        $('#tel').val(msg["result_data"]["mobile"]);
+        $('#wechat').val(msg["result_data"]["wechat"]);
+    });
+    $('#upStuId').val(stuId);
+    $('#newPsw').val(password);
+    $('#confirmPassword').val(password);
+}
+function doUpdate() {
+    var userPhysicalCard = $('#upStuId').val();
+    var userName = $('#name').val();
+    var dept = $('#dept').val();
+    var newPassword = $('#newPsw').val();
+    var confirmPassword = $('#confirmPassword').val();
+    var mobile = $('#tel').val();
+    var wechat = $('#wechat').val();
+    var cookie = localStorage.cookie;
+
+    $.post("/upInfo",{
+        userPhysicalCard : userPhysicalCard,
+        userName : userName,
+        dept : dept,
+        newPassword : newPassword,
+        confirmPassword : confirmPassword,
+        mobile : mobile,
+        wechat : wechat,
+        cookie : cookie
+    }, function (msg) {
+        alert(msg["message"]);
+        window.location.reload();
+    })
 }

@@ -473,4 +473,26 @@ public class UsersImpl {
             e.printStackTrace();
         }
     }
+
+    public int upInfo(Request request, String params, String cookie) {
+        int i=0;
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+            connection.setRequestProperty("Cookie", cookie);
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(br.readLine());
+            if (jsonObject.get("result_code").equals("0")) {
+                i = 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
 }
