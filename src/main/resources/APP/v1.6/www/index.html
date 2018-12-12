@@ -200,9 +200,6 @@
 				</div>
 				<div class="decoration"></div>
 			</div>
-			<div class="layui-progress" lay-showpercent="true" lay-showPercent="yes">
-				<div class="layui-progress-bar" lay-percent="70%"></div>
-			</div>
 			<!-- Page Footer-->
 			<div class="footer">
 				<p class="center-text">Copyright 2018 zimu. All rights reserved.</p></div>
@@ -372,9 +369,9 @@ window.onerror = function(){
             type : 'post',
             url : 'http://211.70.171.14:9999/tsgintf/main/service',
             data : JSON.stringify(params),
-            headers: {
-                "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+localStorage.stuID
-            },
+            // headers: {
+            //     "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+localStorage.stuID
+            // },
             async: true,
             cache: false,
             contentType : "application/json;charset=utf-8",

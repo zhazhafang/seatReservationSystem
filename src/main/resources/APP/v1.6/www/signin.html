@@ -124,16 +124,17 @@
                     type : 'post',
                     url : 'http://211.70.171.14:9999/tsgintf/main/service',
                     data : JSON.stringify(params),
-                    headers: {
-                          "Cookie": "JSESSIONID=E13488CE25E0A4EA45116"+username
-                      },
                     async: true,
                     cache: false,
                     contentType : "application/json;charset=utf-8",
                     dataType : 'json',
-                    success : function(data){
+                    // Cookie : "JSESSIONID=E13488CE25E0A4EA45116123456",
+                    success : function(data, request){
                         if (data.result_code == '0') {
                             notice = "登录成功！";
+                            // if (request.getResponseHeader('Set-Cookie') != null) {
+                            //     localStorage.cookie = request.getResponseHeader('Set-Cookie');
+                            // }
                             window.location = "index.html";
                         }else if (data.result_code == '10002') {
                             notice = "用户名或密码错误！";
