@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
-import com.mysql.fabric.xmlrpc.base.Params;
 import com.zimu.admin.entity.AllRecord;
 import com.zimu.admin.entity.Record;
 import com.zimu.admin.service.Md5;
@@ -97,6 +96,21 @@ public class IndexController {
     }
 
     /**
+     * @Description:用户列表分页显示
+     * @param: [request]
+     * @return: java.lang.String
+     * @auther: HJ
+     * @date: 2018/12/20 11:25
+     */
+    @GetRoute("/showMembers")
+    public String getMember(Request request){
+        Integer page = Integer.valueOf(request.query("page", "1"));
+        Show show = new Show();
+        show.members(request, page);
+        return "page/showMembers.html";
+    }
+
+    /**
      *
      *
      * @Description: 显示使用者位置
@@ -141,11 +155,28 @@ public class IndexController {
      * @auther: zimu
      * @date: 2018/9/24 21:11
      */
-    @PostRoute("delUser")
+    @PostRoute("/delUser")
     @JSON
     public JSONObject delUser(Request request, @Param Integer id) {
         UsersImpl users = new UsersImpl();
         JSONObject jsonObject = users.delUser(request, id);
+        return jsonObject;
+    }
+
+    /**
+     *
+     *
+     * @Description:删除用户
+     * @param: [request, id]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/20 11:10
+     */
+    @PostRoute("delMember")
+    @JSON
+    public JSONObject delMember(Request request,@Param Integer id){
+        UsersImpl members=new UsersImpl();
+        JSONObject jsonObject=members.delMember(request,id);
         return jsonObject;
     }
     /**
@@ -328,6 +359,20 @@ public class IndexController {
         UsersImpl users = new UsersImpl();
         jsonObject = users.getACStuId(id);
         return jsonObject;
+    }
+
+    /**
+     * @Description:获得绑定学号
+     * @param: [id]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/21 16:59
+     */
+    @PostRoute("/getBDCard")
+    @JSON
+    public List<String> getBDCard(@Param Integer id){
+        UsersImpl users = new UsersImpl();
+        return users.getBDCard(id);
     }
 
     /**

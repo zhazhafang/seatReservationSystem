@@ -1,0 +1,276 @@
+#include("header.html", {title : "用户列表"})
+<style>
+    td,th{
+        border: 1px solid #4788fb !important;
+        background-color: rgb(12, 27, 45);
+        color: #fff;
+    }
+</style>
+<body>
+<!--header-->
+<div class="header">
+    <div class="bg_header">
+        <div class="header_nav fl t_title">
+            一点通座位预定系统
+        </div>
+    </div>
+    <div class="header_nav fl">
+    </div>
+    <div class="header_myself fr t_height">
+        <a class="t_a" href="/">返回 &nbsp;</a>
+    </div>
+</div>
+<!--main-->
+<div class="data_content">
+    <div class="data_main">
+        <div class="main_left fl">
+            #include("menu.html")
+        </div>
+        <div class="main_center fl">
+            <div class="center_text t_cos0">
+                <!--左上边框-->
+                <div class="t_line_box">
+                    <i class="t_l_line"></i>
+                    <i class="l_t_line"></i>
+                </div>
+                <!--右上边框-->
+                <div class="t_line_box">
+                    <i class="t_r_line"></i>
+                    <i class="r_t_line"></i>
+                </div>
+                <!--左下边框-->
+                <div class="t_line_box">
+                    <i class="l_b_line"></i>
+                    <i class="b_l_line"></i>
+                </div>
+                <!--右下边框-->
+                <div class="t_line_box">
+                    <i class="r_b_line"></i>
+                    <i class="b_r_line"></i>
+                </div>
+                <div class="main_title">
+                    用户列表
+                </div>
+
+                <div id="users" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
+                    <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
+                            style="background-color: rgb(12, 27, 45);">绑定账号</button>
+                    <table class="layui-table" id="sendMessage">
+                        <colgroup>
+                            <col width="80">
+                            <col width="150">
+                            <col width="80">
+                            <col width="80">
+                            <col width="60">
+                            <col width="180">
+                            <!--<col width="120">-->
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>登录名</th>
+                            <th>QQ</th>
+                            <th>联系方式</th>
+                            <th>寝室号</th>
+                            <th>绑定时间</th>
+                            <th>审核状态</th>
+                            <th>操作</th>
+                            <th>消息</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #for(Members member : members.rows)
+                        <tr>
+                            <td>${member.name}</td>
+                            <td  data-method="confirmTrans" onmouseover="setContent(${member.id});">
+                                <a style="color: #fff;">${member.username}</a>
+                            </td>
+                            <td>${member.qq}</td>
+                            <td>${member.tel}</td>
+                            <td>${member.dormitory}</td>
+                            <td>${member.regtime}</td>
+                            <td>
+                                #if(member.ispass==1)
+                                <span style="color: green">已通过</span>
+                                #elseif(member.ispass==2)
+                                <span style="color: red">已驳回</span>
+                                #else
+                                <span >待审核</span>
+                                #end
+                            </td>
+                            <td> <a onclick="delMember(${member.id});" style="color: #fff;">删除</a></td>
+                            <td id="weixin" onmouseover="setId(${member.id});"><a><i class="fa fa-wechat" style="color: #ba970b"></i></a></td>
+                        </tr>
+                        #end
+                        </tbody>
+                    </table>
+                    <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--绑定账号的模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="background-color:rgba(12, 27, 45, 0.3); color: #fff;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    绑定账号
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所绑学号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
+                                   style="background-color: rgba(12, 27, 45, 0.3);">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="addMember();">
+                    添加
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="/static/layui/layui.all.js"></script>
+<script>
+    var id ;
+
+    layui.use(['laypage', 'layer'], function(){
+        var laypage = layui.laypage
+            ,layer = layui.layer;
+
+        //自定义样式
+        laypage.render({
+            elem: 'demo2'
+            ,count: ${members.totalRows}
+            ,limit: 10
+            ,curr : ${members.pageNum}
+            ,theme : '#0C1B2D'
+            ,jump: function(obj, first) {
+                //obj包含了当前分页的所有参数，比如：
+                if(!first){
+                    //do something
+                    window.location="member?page="+obj.curr;
+                }
+            }
+        });
+        //-------------------------------------------------
+        //触发事件
+        var active = {
+            setTop: function(){
+                console.log(4455);
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 1 //此处以iframe举例
+                    ,title: '请输入消息内容：'
+                    ,area: [$(window).width()/2+'px',
+                        '300px']
+                    ,shade: 0
+                    ,maxmin: true
+                    ,offset: [ //为了演示，随机坐标
+                        150
+                        ,0
+                    ]
+                    ,content: '<form class="layui-form">  <div class="layui-form-item layui-form-text">\n' +
+                        '    <div class="layui-input-block" style="margin-top: 5%;margin-left: 0%;">\n' +
+                        '      <textarea placeholder="请输入内容" id="content" class="layui-textarea"></textarea>\n' +
+                        '    </div>\n' +
+                        '  </div></form>'
+                    ,btn: ['发送', '关闭'] //只是为了演示
+                    ,btn1: function(){
+                        sendMessage();
+                        alert("发送成功！");
+                        layer.closeAll();
+                    }
+                    ,btn2: function(){
+                        layer.closeAll();
+                    }
+                    ,zIndex: layer.zIndex
+                    ,success: function(layero){
+                        layer.setTop(layero);
+                    }
+                });
+            }
+        };
+
+        $('#weixin').on('click', function(){
+            var othis = $(this);
+            active['setTop'] ? active['setTop'].call(this, othis) : '';
+        });
+        //-------------------------------------------------
+
+    });
+    function delMember(ob) {
+        $.post("/delMember",{
+            id : ob
+        }, function (data, status) {
+            alert(data.message);
+            window.location.reload();
+        })
+    }
+    // function addMember() {
+    //     var stuId = $('#stuId').val();
+    //     $.post("/addUser",{
+    //         stuId : stuId
+    //     }, function (data, status) {
+    //         alert(data.message);
+    //         window.location.reload();
+    //     })
+    // }
+    function  setId(ob) {
+        id = ob;
+    }
+</script>
+
+
+<!--显示所绑学号-->
+<script src="/static/layui/layui.js"></script>
+<script>
+
+    var msg = "";
+    function setContent(ob) {
+        msg = "";
+        $.post("/getBDCard", {
+            id : ob
+        }, function (data, status) {
+            msg = "";
+            for (var key in data){
+                msg = msg + data[key] + "<br>";
+            }
+        })
+    }
+
+        var active = {
+            confirmTrans: function(){
+                //配置一个透明的询问框
+                layer.msg(msg, {
+                    time: 20000, //20s后自动关闭
+                    btn: ['关闭']
+                });
+            }
+        };
+
+        $('#users td').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+</script>
+
+#include("footer.html")

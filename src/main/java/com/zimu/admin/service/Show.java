@@ -104,6 +104,19 @@ public class Show {
     /**
      *
      *
+     * @Description: 用户列表分页显示
+     * @param: [request, page]
+     * @return: void
+     * @auther: HJ
+     * @date: 2018/12/20 11:20
+     */
+    public void members(Request request,Integer page){
+        Page<Members> membersPage=select().from(Members.class).page(page,10);
+        request.attribute("members",membersPage);
+    }
+    /**
+     *
+     *
      * @Description: 分页显示公告
      * @param: Request request, Integer page
      * @return: void

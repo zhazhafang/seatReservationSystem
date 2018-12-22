@@ -1,6 +1,8 @@
 package com.zimu.admin.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blade.kit.CollectionKit;
+import com.blade.kit.StringKit;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
 import com.zimu.admin.entity.*;
@@ -16,6 +18,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.github.biezhi.anima.Anima.delete;
 import static io.github.biezhi.anima.Anima.select;
@@ -28,6 +31,29 @@ import static io.github.biezhi.anima.Anima.select;
 public class UsersImpl {
     public JSONObject delUser(Request request, Integer id) {
         int flag = delete().from(Users.class).where("id", id).execute();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("state", 200);
+        if (flag > 0) {
+
+            jsonObject.put("message", "删除成功！");
+        }else {
+
+            jsonObject.put("message", "删除失败！");
+        }
+        return jsonObject;
+    }
+
+    /**
+     *
+     *
+     * @Description:删除用户
+     * @param: [request, id]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/20 10:59
+     */
+    public JSONObject delMember(Request request,Integer id){
+        int flag = delete().from(Members.class).where("id", id).execute();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("state", 200);
         if (flag > 0) {
@@ -240,6 +266,22 @@ public class UsersImpl {
         stuId = "{" +stuId +"}";
         JSONObject object = JSONObject.parseObject(stuId);
         return object;
+    }
+
+
+    /**
+     * @Description:获取绑定账号
+     * @param: [id]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/21 19:29
+     */
+    public List<String> getBDCard(Integer id){
+        List<StuId> bdcards=select("userPhysicalCard").from(StuId.class).where("userId").eq(id).all();
+        if (!CollectionKit.isEmpty(bdcards)) {
+            return bdcards.stream().map(StuId::getUserPhysicalCard).collect(Collectors.toList());
+        }
+        return null;
     }
 
     /**
