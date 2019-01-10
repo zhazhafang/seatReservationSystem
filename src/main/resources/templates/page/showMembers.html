@@ -53,8 +53,8 @@
                 </div>
 
                 <div id="users" style="width:95%;position: absolute;margin-left: 3%;margin-top: 5%;">
-                    <button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"
-                            style="background-color: rgb(12, 27, 45);">绑定账号</button>
+                    <!--<button class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#myModal"-->
+                            <!--style="background-color: rgb(12, 27, 45);">绑定账号</button>-->
                     <table class="layui-table" id="sendMessage">
                         <colgroup>
                             <col width="80">
@@ -89,7 +89,7 @@
                             <td>${member.qq}</td>
                             <td>${member.tel}</td>
                             <td>${member.dormitory}</td>
-                            <td>${member.regtime}</td>
+                            <td>${member.regtime.substring(0,19)}</td>
                             <td>
                                 #if(member.ispass==1)
                                 <span style="color: green">已通过</span>
@@ -105,7 +105,7 @@
                         #end
                         </tbody>
                     </table>
-                    <div id="demo2" style="margin-left: 25%; background-color: rgb(12, 27, 45);"></div>
+                    <div id="demo2" style="margin-left: 25%; "></div>
 
                 </div>
             </div>
@@ -113,39 +113,39 @@
     </div>
 </div>
 <!--绑定账号的模态框-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
-        <div class="modal-content" style="background-color:rgba(12, 27, 45, 0.3); color: #fff;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">×
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    绑定账号
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form class="layui-form" action="">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">所绑学号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"
-                                   style="background-color: rgba(12, 27, 45, 0.3);">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-primary" onclick="addMember();">
-                    添加
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog" >-->
+        <!--<div class="modal-content" style="background-color:rgba(12, 27, 45, 0.3); color: #fff;">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal"-->
+                        <!--aria-hidden="true">×-->
+                <!--</button>-->
+                <!--<h4 class="modal-title" id="myModalLabel">-->
+                    <!--绑定账号-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<form class="layui-form" action="">-->
+                    <!--<div class="layui-form-item">-->
+                        <!--<label class="layui-form-label">所绑学号</label>-->
+                        <!--<div class="layui-input-block">-->
+                            <!--<input type="text" name="stuId" id="stuId" lay-verify="title" autocomplete="off" placeholder="请输入学号" class="layui-input"-->
+                                   <!--style="background-color: rgba(12, 27, 45, 0.3);">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default"-->
+                        <!--data-dismiss="modal">关闭-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-primary" onclick="addMember();">-->
+                    <!--添加-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
 
 <script src="/static/layui/layui.all.js"></script>
 <script>

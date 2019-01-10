@@ -114,6 +114,30 @@ public class Show {
         Page<Members> membersPage=select().from(Members.class).page(page,10);
         request.attribute("members",membersPage);
     }
+
+    /**
+     *
+     *
+     * @Description: 账号分页显示
+     * @param: [request, page]
+     * @return: void
+     * @auther: HJ
+     * @date: 2018/12/29 16:01
+     */
+    public void stuId(Request request,Integer page){
+        Page<StuId> stuIdPage=select().from(StuId.class).page(page,10);
+        for (StuId stuId : stuIdPage.getRows()) {
+            if (stuId.getUserId() == 0) {
+                stuId.setName("未绑定");
+            }else {
+                Members members = select().from(Members.class).byId(stuId.getUserId());
+                stuId.setName(members.getName());
+            }
+        }
+        request.attribute("stues",stuIdPage);
+    }
+
+
     /**
      *
      *

@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 import static io.github.biezhi.anima.Anima.delete;
 import static io.github.biezhi.anima.Anima.select;
+import static io.github.biezhi.anima.Anima.update;
 
 /**
  * @author : zimu
@@ -67,6 +68,40 @@ public class UsersImpl {
     }
 
     /**
+     *
+     *
+     * @Description: 解除绑定
+     * @param: [request, id]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2019/1/2 15:43
+     */
+    public JSONObject unBing(Request request,Integer id){
+        JSONObject jsonObject = new JSONObject();
+        int flag = update().from(StuId.class).set("userId",0).where("id", id).execute();
+        jsonObject.put("state", 200);
+        if (flag > 0) {
+
+            jsonObject.put("message", "解绑成功！");
+        }else {
+
+            jsonObject.put("message", "解绑失败！");
+        }
+//        StuId stuId=new StuId();
+//        stuId.setUserId(0);
+//        Anima.atomic(() -> {
+//            Integer  idd  = stuId.save().asInt();
+//        }).catchException(e -> {
+//            e.printStackTrace();
+//        });
+
+        jsonObject.put("state", 200);
+        jsonObject.put("message", "解绑成功！");
+        return jsonObject;
+    }
+
+
+    /**
      * @Description: 添加用户
      * @param: stuId
      * @return:
@@ -89,6 +124,55 @@ public class UsersImpl {
         jsonObject.put("state", 200);
         jsonObject.put("message", "添加成功！");
         return jsonObject;
+    }
+    /**
+     *
+     *
+     * @Description: 添加账号
+     * @param: [request, userPhysicalCard]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/29 15:30
+     */
+    public JSONObject addStu(Request request,String userPhysicalCard, String password ,String nickname,String params){
+        JSONObject jsonObject=new JSONObject();
+        try {
+            URL url = new URL("http://211.70.171.14:9999/tsgintf/main/service");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json;charset=UTF-8");
+
+            connection.setDoOutput(true);
+            connection.getOutputStream().write(params.getBytes());
+            connection.connect();
+            Map map = connection.getHeaderFields();
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String result = br.readLine();
+            JSONObject object = (JSONObject) JSONObject.parse(result);
+            if(object.get("result_code").equals("0")){
+                Date date = new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String bdtime = df.format(date);
+                StuId stuId=new StuId();
+                stuId.setUserPhysicalCard(userPhysicalCard);
+                stuId.setPassword(password);
+                stuId.setNickname(nickname);
+                stuId.setUserId(0);
+                stuId.setBdtime(bdtime);
+                stuId.setIsuserself(0);
+                stuId.save();
+                jsonObject.put("state",200);
+                jsonObject.put("message","添加成功！");
+            }else {
+                jsonObject.put("state",200);
+                jsonObject.put("message","添加失败！学号或密码错误。");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+
     }
     /**
      * @Description: 添加公告

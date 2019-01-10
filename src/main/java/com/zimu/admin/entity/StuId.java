@@ -18,8 +18,12 @@ public class StuId extends Model {
     private String userPhysicalCard;
     private String password;
     private String nickname;
+    @Column(name = "userId")
     private Integer userId;
-    private String BDTime;
-    private String isuserself;
+    //下划线+字母  后面的字母会切换大小写。
+    private String bdtime;
+//    private String _b_d_time;
+    private Integer isuserself;
+    private String name;
 
 }

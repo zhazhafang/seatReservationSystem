@@ -110,6 +110,25 @@ public class IndexController {
         return "page/showMembers.html";
     }
 
+
+    /**
+     *
+     *
+     * @Description: stuId分页显示
+     * @param: [request]
+     * @return: java.lang.String
+     * @auther: HJ
+     * @date: 2018/12/29 14:58
+     */
+    @GetRoute("/binDing")
+    public String showStuId(Request request){
+
+        Integer page = Integer.valueOf(request.query("page", "1"));
+        Show show = new Show();
+        show.stuId(request, page);
+        return "page/binDing.html";
+    }
+
     /**
      *
      *
@@ -179,6 +198,15 @@ public class IndexController {
         JSONObject jsonObject=members.delMember(request,id);
         return jsonObject;
     }
+
+    @PostRoute("unBing")
+    @JSON
+    public JSONObject unBing(Request request,@Param Integer id){
+        UsersImpl stuId=new UsersImpl();
+        JSONObject jsonObject=stuId.unBing(request,id);
+        return jsonObject;
+    }
+
     /**
      *
      *
@@ -196,6 +224,40 @@ public class IndexController {
         jsonObject = users.addUser(request, stuId);
         return jsonObject;
     }
+
+    /**
+     *
+     *
+     * @Description: 添加账号
+     * @param: [request, userPhysicalCard]
+     * @return: com.alibaba.fastjson.JSONObject
+     * @auther: HJ
+     * @date: 2018/12/29 15:56
+     */
+    @PostRoute("/addStu")
+    @JSON
+    public JSONObject addStu(Request request,@Param String userPhysicalCard, @Param String password, @Param String nickname) {
+        String tversion = String.valueOf(new Date().getTime());
+        JSONObject jsonObject = new JSONObject();
+        Md5 md5 = new Md5();
+        String md5username = md5.getMd5(userPhysicalCard+"_"+tversion);
+        String params = "{\n" +
+                "                    \"intf_code\" : \"QRY_LOGIN\",\n" +
+                "                        \"params\" : {\n" +
+                "                            \"userPhysicalCard\":\""+userPhysicalCard+"\",\n" +
+                "                            \"password\":"+password+",\n" +
+                "                            \"imei\":\""+userPhysicalCard+"\",\n" +
+                "                            \"version\":\"5.0\",\n" +
+                "                            \"tversion\":"+tversion+",\n" +
+                "                            \"md5username\":\""+md5username+"\"\n" +
+                "                        }\n" +
+                "                    }";
+
+        UsersImpl users = new UsersImpl();
+        jsonObject = users.addStu(request, userPhysicalCard, password,nickname, params);
+        return jsonObject;
+    }
+
 
     /**
      * @Description: 公告列表
